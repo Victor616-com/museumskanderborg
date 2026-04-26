@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import GridOverlay from '~/components/DevTools/GridOverlay.vue'
 import { asText } from '@prismicio/client'
 import { components } from '~/slices'
+
+
 
 const { client } = usePrismic()
 const route = useRoute()
@@ -18,4 +21,5 @@ useHead({
   <main>
     <SliceZone :slices="page?.data.slices ?? []" :components="components" />
   </main>
+
 </template>

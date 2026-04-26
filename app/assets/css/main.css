@@ -1,0 +1,28 @@
+:root {
+  --layout-margin: 12px;
+  --layout-gutter: 8px;
+}
+
+@media (min-width: 960px) {
+  :root {
+    --layout-margin: 24px;
+    --layout-gutter: 12px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --layout-gutter: 16px;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+p,
+h1,
+h2,
+h3 {
+  @apply m-0 p-0;
+}

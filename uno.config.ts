@@ -65,8 +65,15 @@ export default defineConfig({
       soria: "Soria",
     },
     colors: {
-      black: "#000000",
-      white: "#EDEDED",
+      accent1: "#E77239",
+      accent2: "#A86062",
+      accent3: "#6E43FE",
+      accent4: "#5F7C9A",
+      accent5: "#EC3828",
+      text: "#2E2E2E",
+      lightText: "#5C5C5C",
+      whiteText: "#FFFFFF",
+      background: "#F3F3F2",
     },
   },
   variants: [
