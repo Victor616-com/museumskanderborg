@@ -1,0 +1,7 @@
+{
+  "libraries": ["./app/slices"],
+  "repositoryName": "museumskanderborg",
+  "adapter": "@slicemachine/adapter-nuxt",
+  "localSliceSimulatorURL": "http://localhost:3000/slice-simulator",
+  "starter": "nuxt-starter-prismic-minimal"
+}
