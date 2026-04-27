@@ -14,7 +14,7 @@ useHead({
 
 <template>
   <template>
-    <main class="my-10 flex flex-col gap-xl">
+    <main class="mt-10 mb-100 flex flex-col gap-xl">
       <SliceZone :slices="page?.data.slices ?? []" :components="components" />
     </main>
   </template>

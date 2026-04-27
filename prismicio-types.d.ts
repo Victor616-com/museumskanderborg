@@ -69,7 +69,11 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type PageDocumentDataSlicesSlice = QuoteSlice | HeroSlice | RichTextSlice;
+type PageDocumentDataSlicesSlice =
+  | ImageLinkSlice
+  | QuoteSlice
+  | HeroSlice
+  | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -311,6 +315,81 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
 /**
+ * Primary content in *ImageLink → Default → Primary*
+ */
+export interface ImageLinkSliceDefaultPrimary {
+  /**
+   * Image field in *ImageLink → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_link.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Link field in *ImageLink → Default → Primary*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_link.default.primary.link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Title field in *ImageLink → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_link.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Text field in *ImageLink → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_link.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * Default variation for ImageLink Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageLinkSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImageLinkSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ImageLink*
+ */
+type ImageLinkSliceVariation = ImageLinkSliceDefault;
+
+/**
+ * ImageLink Shared Slice
+ *
+ * - **API ID**: `image_link`
+ * - **Description**: ImageLink
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageLinkSlice = prismic.SharedSlice<
+  "image_link",
+  ImageLinkSliceVariation
+>;
+
+/**
  * Primary content in *Quote → Default → Primary*
  */
 export interface QuoteSliceDefaultPrimary {
@@ -501,6 +580,10 @@ declare module "@prismicio/client" {
       HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
+      ImageLinkSlice,
+      ImageLinkSliceDefaultPrimary,
+      ImageLinkSliceVariation,
+      ImageLinkSliceDefault,
       QuoteSlice,
       QuoteSliceDefaultPrimary,
       QuoteSliceVariation,

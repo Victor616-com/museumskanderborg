@@ -7,9 +7,7 @@ const breakpoints = Object.fromEntries(
 );
 
 const colCalc = (span: number, includeGutter = false) => {
-  if (span < 1 || span > 12) return;
-
-  return `calc((${span} * ((100dvw - (2 * var(--layout-margin)) - (11 * var(--layout-gutter))) / 12)) + (${includeGutter ? span : span - 1} * var(--layout-gutter)))`;
+  return `calc((${span} * ((100%   - (11 * var(--layout-gutter))) / 12)) + (${includeGutter ? span : span - 1} * var(--layout-gutter)))`;
 };
 
 const spacingRules = [
@@ -31,6 +29,8 @@ const spacingRules = [
   ["pr", "padding-right", true],
   ["pt", "padding-top", true],
   ["pb", "padding-bottom", true],
+  ["left", "left", true],
+  ["right", "right", true],
 ] as const;
 
 const keywordMap: Record<string, string> = {
@@ -47,6 +47,8 @@ const sizeMap: Record<string, string> = {
   m: "48px",
   l: "78px",
   xl: "128px",
+  margin: "var(--layout-margin)",
+  gutter: "var(--layout-gutter)",
 };
 const sizePattern = Object.keys(sizeMap).join("|");
 
