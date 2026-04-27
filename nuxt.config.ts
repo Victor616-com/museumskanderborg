@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: ['@nuxt/eslint', '@nuxtjs/prismic', '@unocss/nuxt', '@nuxt/fonts'],
+  modules: ['@nuxt/eslint', '@nuxtjs/prismic', '@unocss/nuxt', '@nuxt/image'],
 
   prismic: {
     endpoint: apiEndpoint || repositoryName,
@@ -27,5 +27,5 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: '2026-01-02',
-  css: ["~/assets/css/main.css"],
+  css: ['~/assets/css/main.css']
 })

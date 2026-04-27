@@ -69,7 +69,7 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type PageDocumentDataSlicesSlice = RichTextSlice;
+type PageDocumentDataSlicesSlice = QuoteSlice | HeroSlice | RichTextSlice;
 
 /**
  * Content for Page documents
@@ -222,11 +222,172 @@ export type SettingsDocument<Lang extends string = string> =
 export type AllDocumentTypes = PageDocument | SettingsDocument;
 
 /**
- * Primary content in *RichText → Default → Primary*
+ * Item in *PageHero → Default → Primary → Slide Show*
+ */
+export interface HeroSliceDefaultPrimarySlideShowItem {
+  /**
+   * Image field in *PageHero → Default → Primary → Slide Show*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.slide_show[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Text field in *PageHero → Default → Primary → Slide Show*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.slide_show[].text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+
+  /**
+   * Link field in *PageHero → Default → Primary → Slide Show*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.slide_show[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Primary content in *PageHero → Default → Primary*
+ */
+export interface HeroSliceDefaultPrimary {
+  /**
+   * Title field in *PageHero → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Slide Show field in *PageHero → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.slide_show[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  slide_show: prismic.GroupField<
+    Simplify<HeroSliceDefaultPrimarySlideShowItem>
+  >;
+}
+
+/**
+ * Default variation for PageHero Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeroSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *PageHero*
+ */
+type HeroSliceVariation = HeroSliceDefault;
+
+/**
+ * PageHero Shared Slice
+ *
+ * - **API ID**: `hero`
+ * - **Description**: Hero
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Primary content in *Quote → Default → Primary*
+ */
+export interface QuoteSliceDefaultPrimary {
+  /**
+   * Text field in *Quote → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: quote.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  text: prismic.KeyTextField;
+
+  /**
+   * Author field in *Quote → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: quote.default.primary.author
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  author: prismic.KeyTextField;
+
+  /**
+   * Image field in *Quote → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: quote.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Quote Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type QuoteSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<QuoteSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Quote*
+ */
+type QuoteSliceVariation = QuoteSliceDefault;
+
+/**
+ * Quote Shared Slice
+ *
+ * - **API ID**: `quote`
+ * - **Description**: Quote
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type QuoteSlice = prismic.SharedSlice<"quote", QuoteSliceVariation>;
+
+/**
+ * Primary content in *RichTextEditor → Default → Primary*
  */
 export interface RichTextSliceDefaultPrimary {
   /**
-   * Content field in *RichText → Default → Primary*
+   * Title field in *RichTextEditor → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Content field in *RichTextEditor → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: Lorem ipsum...
@@ -237,7 +398,7 @@ export interface RichTextSliceDefaultPrimary {
 }
 
 /**
- * Default variation for RichText Slice
+ * Default variation for RichTextEditor Slice
  *
  * - **API ID**: `default`
  * - **Description**: RichText
@@ -250,12 +411,12 @@ export type RichTextSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
- * Slice variation for *RichText*
+ * Slice variation for *RichTextEditor*
  */
 type RichTextSliceVariation = RichTextSliceDefault;
 
 /**
- * RichText Shared Slice
+ * RichTextEditor Shared Slice
  *
  * - **API ID**: `rich_text`
  * - **Description**: RichText
@@ -265,6 +426,48 @@ export type RichTextSlice = prismic.SharedSlice<
   "rich_text",
   RichTextSliceVariation
 >;
+
+/**
+ * Primary content in *Test → Default → Primary*
+ */
+export interface TestSliceDefaultPrimary {
+  /**
+   * Test field in *Test → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: test.default.primary.test
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  test: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Test Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TestSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TestSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Test*
+ */
+type TestSliceVariation = TestSliceDefault;
+
+/**
+ * Test Shared Slice
+ *
+ * - **API ID**: `test`
+ * - **Description**: Test
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TestSlice = prismic.SharedSlice<"test", TestSliceVariation>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -293,10 +496,23 @@ declare module "@prismicio/client" {
       SettingsDocument,
       SettingsDocumentData,
       AllDocumentTypes,
+      HeroSlice,
+      HeroSliceDefaultPrimarySlideShowItem,
+      HeroSliceDefaultPrimary,
+      HeroSliceVariation,
+      HeroSliceDefault,
+      QuoteSlice,
+      QuoteSliceDefaultPrimary,
+      QuoteSliceVariation,
+      QuoteSliceDefault,
       RichTextSlice,
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
       RichTextSliceDefault,
+      TestSlice,
+      TestSliceDefaultPrimary,
+      TestSliceVariation,
+      TestSliceDefault,
     };
   }
 }

@@ -28,11 +28,22 @@ const spacingRules = [
   ["pt", "padding-top", true],
   ["pb", "padding-bottom", true],
 ] as const;
+
 const keywordMap: Record<string, string> = {
   gutter: "var(--layout-gutter)",
   layoutMargin: "var(--layout-margin)",
 };
 const keywordPattern = Object.keys(keywordMap).join("|");
+
+const sizeMap: Record<string, string> = {
+  "3xs": "14px",
+  "2xs": "16px",
+  xs: "28px",
+  s: "32px",
+  m: "48px",
+  l: "78px",
+};
+const sizePattern = Object.keys(sizeMap).join("|");
 
 export default defineConfig({
   presets: [presetUno()],
@@ -51,18 +62,22 @@ export default defineConfig({
       new RegExp(`^${prefix}-(${keywordPattern})$`),
       ([, keyword]: [string, string]) => ({ [property]: keywordMap[keyword] }),
     ]),
+    ...spacingRules.map(([prefix, property]) => [
+      new RegExp(`^${prefix}-(${sizePattern})$`),
+      ([, size]: [string, string]) => ({ [property]: sizeMap[size] }),
+    ]),
   ],
   safelist: [
     ...spacingRules.flatMap(([prefix]) => [
       ...Array.from({ length: 12 }, (_, i) => `${prefix}-${i + 1}col`),
       ...Object.keys(keywordMap).map((keyword) => `${prefix}-${keyword}`),
+      ...Object.keys(sizeMap).map((size) => `${prefix}-${size}`),
     ]),
   ],
   theme: {
     fontFamily: {
-      inter: "Inter",
-      geist: "Geist",
-      soria: "Soria",
+      display: "var(--font-display)",
+      body: "var(--font-body)",
     },
     colors: {
       accent1: "#E77239",
@@ -75,6 +90,30 @@ export default defineConfig({
       whiteText: "#FFFFFF",
       background: "#F3F3F2",
     },
+  },
+  shortcuts: {
+    // Headings
+    "text-heading-0": "font-display font-black text-[70px] ",
+    "text-heading-1": "font-display font-semibold text-[72px]",
+    "text-heading-2": "font-display font-semibold text-[48px]",
+    "text-heading-3": "font-display font-semibold text-[36px]",
+    "text-heading-4": "font-display font-semibold text-[24px]",
+    "text-heading-5": "font-display font-semibold text-[16px]",
+
+    // Body
+    "text-2xs-400": "font-body font-normal text-[14px]",
+    "text-xs-400": "font-body font-normal text-[16px] line-height-[1.5]",
+    "text-xs-700": "font-body font-bold text-[16px] line-height-[1.5]",
+    "text-s-400": "font-body font-normal text-[20px] line-height-[1.5]",
+    "text-s-700": "font-body font-bold text-[20px]",
+    "text-m-400": "font-body font-normal text-[24px]",
+    "text-m-700": "font-body font-bold text-[24px]",
+    "text-l-400": "font-body font-normal text-[28px]",
+    "text-l-700": "font-body font-bold text-[28px]",
+    "text-xl-400": "font-body font-normal text-[32px]",
+    "text-xl-700": "font-body font-bold text-[32px]",
+    "text-2xl-400": "font-body font-normal text-[40px]",
+    "text-2xl-700": "font-body font-bold text-[40px]",
   },
   variants: [
     // Min-width variants

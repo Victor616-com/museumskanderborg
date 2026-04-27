@@ -1,18 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
+@import "../fonts/index.css";
+
+@layer base {
+  :root {
+    --font-display: "Urbanist", sans-serif;
+    --font-body: "NueMontreal", sans-serif;
+  }
+}
+
 :root {
-  --layout-margin: 12px;
-  --layout-gutter: 8px;
+  --layout-gutter: 10px;
+  --layout-margin: 16px;
+}
+
+@media (min-width: 656px) {
+  :root {
+    --layout-gutter: 16px;
+    --layout-margin: 28px;
+  }
 }
 
 @media (min-width: 960px) {
   :root {
-    --layout-margin: 24px;
-    --layout-gutter: 12px;
+    --layout-gutter: 24px;
+    --layout-margin: 42px;
   }
 }
 
 @media (min-width: 1280px) {
   :root {
-    --layout-gutter: 16px;
+    --layout-gutter: 24px;
+    --layout-margin: 42px;
   }
 }
 * {
@@ -25,4 +43,68 @@ h1,
 h2,
 h3 {
   @apply m-0 p-0;
+}
+
+body {
+  margin-left: var(--layout-margin);
+  margin-right: var(--layout-margin);
+}
+
+p {
+  @apply text-xs-400;
+}
+
+.s-rich-text h1 {
+  @apply text-heading-3;
+}
+.s-rich-text h2 {
+  @apply text-heading-4;
+}
+.s-rich-text h3 {
+  @apply text-heading-5;
+}
+.s-rich-text h4 {
+  @apply text-heading-5;
+}
+.s-rich-text h5 {
+  @apply text-heading-5;
+}
+.s-rich-text p {
+  @apply text-xs-400;
+}
+.s-rich-text ul {
+  @apply text-xs-400;
+}
+.s-rich-text a {
+  @apply text-xs-400 text-accent4;
+}
+@media (min-width: 960px) {
+  p {
+    @apply text-s-400;
+  }
+
+  .s-rich-text h1 {
+    @apply text-heading-2;
+  }
+  .s-rich-text h2 {
+    @apply text-heading-3;
+  }
+  .s-rich-text h3 {
+    @apply text-heading-4;
+  }
+  .s-rich-text h4 {
+    @apply text-heading-5;
+  }
+  .s-rich-text h5 {
+    @apply text-heading-5;
+  }
+  .s-rich-text p {
+    @apply text-s-400;
+  }
+  .s-rich-text ul {
+    @apply text-s-400;
+  }
+  .s-rich-text a {
+    @apply text-s-400 text-accent4;
+  }
 }

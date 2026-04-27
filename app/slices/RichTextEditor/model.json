@@ -1,7 +1,7 @@
 {
   "id": "rich_text",
   "type": "SharedSlice",
-  "name": "RichText",
+  "name": "RichTextEditor",
   "description": "RichText",
   "variations": [
     {
@@ -11,13 +11,22 @@
       "version": "sktwi1xtmkfgx8626",
       "description": "RichText",
       "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,heading2,heading3,heading4,heading5,heading6"
+          }
+        },
         "content": {
           "type": "StructuredText",
           "config": {
             "label": "Content",
             "placeholder": "Lorem ipsum...",
             "allowTargetBlank": true,
-            "multi": "paragraph,preformatted,heading1,heading2,heading3,strong,em,hyperlink,embed,list-item",
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,strong,em,hyperlink,embed,list-item,heading4,heading5",
             "labels": [
               "codespan"
             ]
