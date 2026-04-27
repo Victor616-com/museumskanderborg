@@ -1,6 +1,10 @@
 import { defineConfig, presetUno, transformerDirectives } from "unocss";
 
-const breakpoints = [375, 656, 960, 1280, 1440, 1536, 1920, 2560];
+const breakpointList = [375, 656, 960, 1280, 1440, 1536, 1920, 2560];
+
+const breakpoints = Object.fromEntries(
+  breakpointList.map((bp) => [`bp${bp}`, `${bp}px`]),
+);
 
 const colCalc = (span: number, includeGutter = false) => {
   if (span < 1 || span > 12) return;
@@ -42,6 +46,7 @@ const sizeMap: Record<string, string> = {
   s: "32px",
   m: "48px",
   l: "78px",
+  xl: "128px",
 };
 const sizePattern = Object.keys(sizeMap).join("|");
 
@@ -75,6 +80,7 @@ export default defineConfig({
     ]),
   ],
   theme: {
+    breakpoints,
     fontFamily: {
       display: "var(--font-display)",
       body: "var(--font-body)",
@@ -92,59 +98,65 @@ export default defineConfig({
     },
   },
   shortcuts: {
-    // Headings
-    "text-heading-0": "font-display font-black text-[70px] ",
-    "text-heading-1": "font-display font-semibold text-[72px]",
-    "text-heading-2": "font-display font-semibold text-[48px]",
-    "text-heading-3": "font-display font-semibold text-[36px]",
-    "text-heading-4": "font-display font-semibold text-[24px]",
-    "text-heading-5": "font-display font-semibold text-[16px]",
+    // Headings — scale between 375px and 1440px viewport
+    "text-heading-0":
+      "font-display font-black text-[clamp(2.75rem,1.997rem+3.21vw,4.375rem)] leading-[1.05]", // 44 → 70
+    "text-heading-1":
+      "font-display font-semibold text-[clamp(2.5rem,1.638rem+3.68vw,4.5rem)] leading-[1.05]", // 40 → 72
+    "text-heading-2":
+      "font-display font-semibold text-[clamp(2rem,1.46rem+2.3vw,3rem)] leading-[1.1]", // 32 → 48
+    "text-heading-3":
+      "font-display font-semibold text-[clamp(1.625rem,1.397rem+0.972vw,2.25rem)] leading-[1.15]", // 26 → 36
+    "text-heading-4":
+      "font-display font-semibold text-[clamp(1.25rem,1.14rem+0.46vw,1.5rem)] leading-[1.2]", // 20 → 24
+    "text-heading-5": "font-display font-semibold text-[1rem] leading-[1.3]", // 16 (fixed)
 
-    // Body
-    "text-2xs-400": "font-body font-normal text-[14px]",
-    "text-xs-400": "font-body font-normal text-[16px] line-height-[1.5]",
-    "text-xs-700": "font-body font-bold text-[16px] line-height-[1.5]",
-    "text-s-400": "font-body font-normal text-[20px] line-height-[1.5]",
-    "text-s-700": "font-body font-bold text-[20px]",
-    "text-m-400": "font-body font-normal text-[24px]",
-    "text-m-700": "font-body font-bold text-[24px]",
-    "text-l-400": "font-body font-normal text-[28px]",
-    "text-l-700": "font-body font-bold text-[28px]",
-    "text-xl-400": "font-body font-normal text-[32px]",
-    "text-xl-700": "font-body font-bold text-[32px]",
-    "text-2xl-400": "font-body font-normal text-[40px]",
-    "text-2xl-700": "font-body font-bold text-[40px]",
+    // Body — normal weights
+    "text-2xs-400":
+      "font-body font-normal text-[clamp(0.8125rem,0.787rem+0.108vw,0.875rem)] leading-[1.5]", // 13 → 14
+    "text-xs-400":
+      "font-body font-normal text-[clamp(1rem,0.95rem+0.215vw,1.125rem)] leading-[1.5]", // 16 → 18
+    "text-s-400":
+      "font-body font-normal text-[clamp(1.125rem,1.02rem+0.43vw,1.375rem)] leading-[1.5]", // 18 → 22
+    "text-m-400":
+      "font-body font-normal text-[clamp(1.25rem,1.04rem+0.92vw,1.5rem)] leading-[1.4]", // 20 → 24
+    "text-l-400":
+      "font-body font-normal text-[clamp(1.375rem,1.139rem+1.0vw,1.75rem)] leading-[1.35]", // 22 → 28
+    "text-xl-400":
+      "font-body font-normal text-[clamp(1.5rem,1.215rem+1.215vw,2rem)] leading-[1.3]", // 24 → 32
+    "text-2xl-400":
+      "font-body font-normal text-[clamp(1.75rem,1.357rem+1.682vw,2.5rem)] leading-[1.25]", // 28 → 40
+
+    // Body — bold weights (same sizes as 400)
+    "text-xs-700":
+      "font-body font-bold text-[clamp(1rem,0.95rem+0.215vw,1.125rem)] leading-[1.5]",
+    "text-s-700":
+      "font-body font-bold text-[clamp(1.125rem,1.02rem+0.43vw,1.375rem)] leading-[1.5]",
+    "text-m-700":
+      "font-body font-bold text-[clamp(1.25rem,1.04rem+0.92vw,1.5rem)] leading-[1.4]",
+    "text-l-700":
+      "font-body font-bold text-[clamp(1.375rem,1.139rem+1.0vw,1.75rem)] leading-[1.4]",
+    "text-xl-700":
+      "font-body font-bold text-[clamp(1.5rem,1.215rem+1.215vw,2rem)] leading-[1.4]",
+    "text-2xl-700":
+      "font-body font-bold text-[clamp(1.75rem,1.357rem+1.682vw,2.5rem)] leading-[1.4]",
   },
   variants: [
-    // Min-width variants
+    // >=NNN: → rewrites to bpNNN: so UnoCSS's native breakpoint handler picks it up
     (matcher) => {
-      // Sort descending so bigger breakpoints have higher priority
-      for (const bp of [...breakpoints].sort((a, b) => b - a)) {
-        const regex = new RegExp(`^>=${bp}:(.*)$`);
-        const match = matcher.match(regex);
-        if (match) {
-          return {
-            matcher: match[1],
-            parent: `@media (min-width: ${bp}px)`,
-            sort: bp, // bigger breakpoint → higher sort → later in CSS → overrides smaller ones
-          };
-        }
-      }
+      const match = matcher.match(/^>=(\d+):(.*)$/);
+      if (!match) return;
+      const [, bp, rest] = match;
+      if (!breakpointList.includes(Number(bp))) return;
+      return { matcher: `bp${bp}:${rest}` };
     },
-
-    // Max-width variants
+    // <=NNN: → rewrites to <bpNNN: (UnoCSS's built-in max-width prefix)
     (matcher) => {
-      for (const bp of [...breakpoints].sort((a, b) => a - b)) {
-        const regex = new RegExp(`^<=${bp}:(.*)$`);
-        const match = matcher.match(regex);
-        if (match) {
-          return {
-            matcher: match[1],
-            parent: `@media (max-width: ${bp}px)`,
-            sort: -bp, // smaller max-width → higher priority
-          };
-        }
-      }
+      const match = matcher.match(/^<=(\d+):(.*)$/);
+      if (!match) return;
+      const [, bp, rest] = match;
+      if (!breakpointList.includes(Number(bp))) return;
+      return { matcher: `<bp${bp}:${rest}` };
     },
   ],
 });

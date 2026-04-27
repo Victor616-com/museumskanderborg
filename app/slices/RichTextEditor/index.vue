@@ -6,7 +6,7 @@ defineProps(getSliceComponentProps<Content.RichTextSlice>());
 
 <template>
   <section
-    class="s-rich-text max-w-12col >=656:max-w-10col >=960:max-w-8col >=960:ml-1col flex flex-col gap-s mb-400px"
+    class="s-rich-text max-w-12col >=656:max-w-10col >=960:max-w-8col >=960:ml-1col flex flex-col gap-s"
   >
     <div class="relative">
       <PrismicRichText :field="slice.primary.title" />
