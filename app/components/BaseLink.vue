@@ -1,8 +1,11 @@
 <template>
   <div class="c-base-link group">
     <div class="flex gap-2xs items-center">
-      <PrismicLink :field="link" class="text-s-400 text-whiteText">
-        {{ link.text || "Read more" }}
+      <PrismicLink
+        :field="link"
+        class="text-s-400 text-whiteText transition-all duration-300 group-hover:translate-x-1"
+      >
+        {{ link?.text || "Read more" }}
       </PrismicLink>
       <IconArrow class="transition-all duration-300 group-hover:-rotate-45" />
     </div>
@@ -22,7 +25,7 @@ const props = defineProps({
 
 <style lang="postcss">
 :where(.c-base-link) {
-  @apply flex flex-col gap-3xs w-fit;
+  @apply flex flex-col gap-3xs w-fit cursor-pointer;
 
   & a {
     color: inherit;

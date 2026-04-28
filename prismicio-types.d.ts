@@ -69,7 +69,134 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
+/**
+ * Content for Event documents
+ */
+interface EventDocumentData {
+  /**
+   * Title field in *Event*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Date field in *Event*
+   *
+   * - **Field Type**: Timestamp
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/timestamp
+   */
+  date: prismic.TimestampField;
+
+  /**
+   * Description field in *Event*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Image field in *Event*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Event document from Prismic
+ *
+ * - **API ID**: `event`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type EventDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<EventDocumentData>, "event", Lang>;
+
+type EventPageDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Event Page documents
+ */
+interface EventPageDocumentData {
+  /**
+   * Slice Zone field in *Event Page*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event_page.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<EventPageDocumentDataSlicesSlice>; /**
+   * Meta Title field in *Event Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: event_page.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Event Page*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: event_page.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Event Page*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: event_page.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Event Page document from Prismic
+ *
+ * - **API ID**: `event_page`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type EventPageDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<EventPageDocumentData>,
+    "event_page",
+    Lang
+  >;
+
 type PageDocumentDataSlicesSlice =
+  | EventsSlice
   | ImageLinkSlice
   | QuoteSlice
   | HeroSlice
@@ -223,7 +350,53 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
-export type AllDocumentTypes = PageDocument | SettingsDocument;
+export type AllDocumentTypes =
+  | EventDocument
+  | EventPageDocument
+  | PageDocument
+  | SettingsDocument;
+
+/**
+ * Primary content in *Events → Default → Primary*
+ */
+export interface EventsSliceDefaultPrimary {
+  /**
+   * Title field in *Events → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: events.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for Events Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EventsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<EventsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Events*
+ */
+type EventsSliceVariation = EventsSliceDefault;
+
+/**
+ * Events Shared Slice
+ *
+ * - **API ID**: `events`
+ * - **Description**: Events
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EventsSlice = prismic.SharedSlice<"events", EventsSliceVariation>;
 
 /**
  * Item in *PageHero → Default → Primary → Slide Show*
@@ -569,12 +742,21 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      EventDocument,
+      EventDocumentData,
+      EventPageDocument,
+      EventPageDocumentData,
+      EventPageDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,
       AllDocumentTypes,
+      EventsSlice,
+      EventsSliceDefaultPrimary,
+      EventsSliceVariation,
+      EventsSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimarySlideShowItem,
       HeroSliceDefaultPrimary,

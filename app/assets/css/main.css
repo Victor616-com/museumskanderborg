@@ -11,6 +11,10 @@
 :root {
   --layout-gutter: 10px;
   --layout-margin: 16px;
+
+  --layout-column: calc(
+    (100vw - (2 * var(--layout-margin)) - (11 * var(--layout-gutter))) / 12
+  );
 }
 
 @media (min-width: 656px) {
