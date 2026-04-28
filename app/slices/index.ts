@@ -9,5 +9,4 @@ export const components = defineSliceZoneComponents({
   image_link: defineAsyncComponent(() => import("./ImageLink/index.vue")),
   quote: defineAsyncComponent(() => import("./Quote/index.vue")),
   rich_text: defineAsyncComponent(() => import("./RichTextEditor/index.vue")),
-  test: defineAsyncComponent(() => import("./Test/index.vue")),
 });
