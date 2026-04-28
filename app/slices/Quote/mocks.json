@@ -35,6 +35,21 @@
 				"credits": null,
 				"__TYPE__": "ImageContent",
 				"thumbnails": {}
+			},
+			"block_heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Ea et ullamco est sint ea adipisicing mollit sunt sit adipisicing ad ea."
+						}
+					}
+				]
+			},
+			"display_block_heading": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": []

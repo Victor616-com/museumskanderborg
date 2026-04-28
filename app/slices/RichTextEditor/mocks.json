@@ -24,6 +24,21 @@
 						}
 					}
 				]
+			},
+			"block_heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Consequat ea laborum ad excepteur mollit veniam aliquip adipisicing."
+						}
+					}
+				]
+			},
+			"display_block_heading": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": [

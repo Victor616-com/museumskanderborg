@@ -12,6 +12,24 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
+        "display_block_heading": {
+          "type": "Boolean",
+          "config": {
+            "label": "Display Block Heading",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "block_heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Block Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em"
+          }
+        },
         "text": {
           "type": "Text",
           "config": {

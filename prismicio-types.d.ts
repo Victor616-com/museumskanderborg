@@ -567,6 +567,27 @@ export type ImageLinkSlice = prismic.SharedSlice<
  */
 export interface QuoteSliceDefaultPrimary {
   /**
+   * Display Block Heading field in *Quote → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: quote.default.primary.display_block_heading
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  display_block_heading: prismic.BooleanField;
+
+  /**
+   * Block Heading field in *Quote → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: quote.default.primary.block_heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  block_heading: prismic.RichTextField;
+
+  /**
    * Text field in *Quote → Default → Primary*
    *
    * - **Field Type**: Text
@@ -629,6 +650,27 @@ export type QuoteSlice = prismic.SharedSlice<"quote", QuoteSliceVariation>;
  */
 export interface RichTextSliceDefaultPrimary {
   /**
+   * Display Block Heading field in *RichTextEditor → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: rich_text.default.primary.display_block_heading
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  display_block_heading: prismic.BooleanField;
+
+  /**
+   * Block Heading field in *RichTextEditor → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: rich_text.default.primary.block_heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  block_heading: prismic.RichTextField;
+
+  /**
    * Title field in *RichTextEditor → Default → Primary*
    *
    * - **Field Type**: Rich Text
@@ -678,48 +720,6 @@ export type RichTextSlice = prismic.SharedSlice<
   "rich_text",
   RichTextSliceVariation
 >;
-
-/**
- * Primary content in *Test → Default → Primary*
- */
-export interface TestSliceDefaultPrimary {
-  /**
-   * Test field in *Test → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: test.default.primary.test
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  test: prismic.KeyTextField;
-}
-
-/**
- * Default variation for Test Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type TestSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<TestSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *Test*
- */
-type TestSliceVariation = TestSliceDefault;
-
-/**
- * Test Shared Slice
- *
- * - **API ID**: `test`
- * - **Description**: Test
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type TestSlice = prismic.SharedSlice<"test", TestSliceVariation>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -774,10 +774,6 @@ declare module "@prismicio/client" {
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
       RichTextSliceDefault,
-      TestSlice,
-      TestSliceDefaultPrimary,
-      TestSliceVariation,
-      TestSliceDefault,
     };
   }
 }
