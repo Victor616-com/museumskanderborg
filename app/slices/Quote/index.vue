@@ -2,7 +2,7 @@
   <section
     class="max-w-12col flex flex-col-reverse >=656:flex-row justify-between gap-s"
   >
-    <div class="flex flex-col max-w-12col >=656:max-w-7col">
+    <div class="flex flex-col max-w-12col >=656:max-w-7col >=656:pt-s">
       <div class="flex flex-row gap-xs">
         <span class="relative">
           <p class="text-90px >=960:text-128px line-height-70%">“</p>
@@ -11,7 +11,7 @@
           ></div>
         </span>
         <div class="flex flex-col gap-s >=656:gap-m">
-          <p class=">=1280:text-2xl-700 >=960:text-xl-700 text-s-700">
+          <p class=">=1280:text-2xl-700 >=960:text-xl-700 text-l-700">
             {{ quote.text }}
           </p>
           <p class="">{{ quote.author }}</p>

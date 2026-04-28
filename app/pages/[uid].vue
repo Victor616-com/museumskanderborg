@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import GridOverlay from "~/components/DevTools/GridOverlay.vue";
 import { asText } from "@prismicio/client";
 import { components } from "~/slices";
 

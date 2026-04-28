@@ -7,7 +7,7 @@ const breakpoints = Object.fromEntries(
 );
 
 const colCalc = (span: number, includeGutter = false) => {
-  return `calc((${span} * ((100%   - (11 * var(--layout-gutter))) / 12)) + (${includeGutter ? span : span - 1} * var(--layout-gutter)))`;
+  return `calc((${span} * var(--layout-column)) + (${includeGutter ? span : span - 1} * var(--layout-gutter)))`;
 };
 
 const spacingRules = [
@@ -110,7 +110,7 @@ export default defineConfig({
     "text-heading-3":
       "font-display font-semibold text-[clamp(1.625rem,1.397rem+0.972vw,2.25rem)] leading-[1.15]", // 26 → 36
     "text-heading-4":
-      "font-display font-semibold text-[clamp(1.25rem,1.14rem+0.46vw,1.5rem)] leading-[1.2]", // 20 → 24
+      "font-display font-semibold text-[clamp(1.25rem,1.14rem+0.46vw,1.6rem)] leading-[1.2]", // 20 → 24
     "text-heading-5": "font-display font-semibold text-[1rem] leading-[1.3]", // 16 (fixed)
 
     // Body — normal weights
