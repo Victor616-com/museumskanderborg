@@ -19,7 +19,7 @@ const staffWithFallback = data.staff_members.map((staff) => ({
     />
     <div
       v-if="data.staff_members.length > 1"
-      class="w-full flex flex-row gap-gutter flex-wrap"
+      class="w-full flex flex-row gap-gutter flex-wrap -mt-xs"
     >
       <div
         v-for="(staff, index) in staffWithFallback"
@@ -70,7 +70,12 @@ const staffWithFallback = data.staff_members.map((staff) => ({
       </div>
     </div>
     <div v-else>
-      <div class="c-staff-single w-12col >=656:w-11col >=1280:w-9col gap-m">
+      <div
+        :class="[
+          'c-staff-single',
+          'w-12col >=656:w-11col >=1280:w-9col gap-m -mt-xs',
+        ]"
+      >
         <div class="c-staff-single__header flex flex-col gap-m">
           <span
             class="relative max-w-7col >=656:max-w-5col >=1280:max-w-5col flex flex-col gap-2xs"
