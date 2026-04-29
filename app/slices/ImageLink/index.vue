@@ -1,5 +1,5 @@
 <template>
-  <section class="c-slice-image-link">
+  <section class="c-slice-image-link" data-long-read-heading>
     <div class="image-wrapper hidden >=656:block">
       <div class="image-container">
         <NuxtImg
@@ -12,7 +12,9 @@
         class="absolute top-20% right-margin min-w-4col max-w-6col flex flex-col gap-3xs"
       >
         <div class="w-full h-2px bg-whiteText"></div>
-        <h2 class="text-whiteText relative">{{ data.title }}</h2>
+        <h2 class="text-whiteText relative" data-long-read-heading>
+          {{ data.title }}
+        </h2>
       </div>
       <div
         class="absolute top-60% >=1280:top-70% right-margin min-w-4col max-w-8col >=1280:max-w-5col aspect-[16/9] bg-accent4 px-xs pt-m pb-m flex flex-col gap-s"
@@ -28,7 +30,9 @@
     >
       <div class="w-fit max-w-12col flex flex-col gap-3xs">
         <div class="w-full h-2px bg-whiteText"></div>
-        <h2 class="text-whiteText relative">{{ data.title }}</h2>
+        <h2 class="text-whiteText relative">
+          {{ data.title }}
+        </h2>
       </div>
       <div class="flex flex-col gap-xs s-rich-text text-whiteText">
         <PrismicRichText :field="data.text" />

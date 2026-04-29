@@ -23,6 +23,7 @@ const formattedDate = computed(() => {
 
 <template>
   <main>
+    <LongRead />
     <NuxtImg
       v-if="event?.data.image.url"
       :src="event.data.image.url"
@@ -30,6 +31,8 @@ const formattedDate = computed(() => {
     />
     <h1>{{ event?.data.title }}</h1>
     <p>{{ formattedDate }}</p>
-    <PrismicRichText :field="event?.data.description" />
+    <div class="s-rich-text">
+      <PrismicRichText :field="event?.data.description" />
+    </div>
   </main>
 </template>
