@@ -7,9 +7,15 @@
     <div
       class="events-cursor absolute pointer-events-none z-10 rounded-50% flex items-center justify-center select-none"
       :class="isHovering ? 'is-active' : ''"
-      :style="{ left: `${springX}px`, top: `${springY}px`, backgroundColor: accentColor }"
+      :style="{
+        left: `${springX}px`,
+        top: `${springY}px`,
+        backgroundColor: accentColor,
+      }"
     >
-      <span class="text-whiteText uppercase tracking-widest text-2xs-400">Explore</span>
+      <span class="text-whiteText uppercase tracking-widest text-2xs-400"
+        >Explore</span
+      >
     </div>
 
     <div class="w-full flex flex-col >=656:flex-row justify-between gap-s">
@@ -98,7 +104,7 @@ onBeforeUnmount(() => {
   if (springRaf) cancelAnimationFrame(springRaf);
 });
 
-const { data: events } = await useAsyncData("events", () =>
+const { data: events } = await useAsyncData("event", () =>
   client.getAllByType("event", {
     orderings: { field: "my.event.date", direction: "asc" },
     limit: 5,

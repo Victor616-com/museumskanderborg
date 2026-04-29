@@ -1,0 +1,31 @@
+{
+  "format": "custom",
+  "id": "department",
+  "label": "Department",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "UID"
+        }
+      },
+      "department_name": {
+        "type": "Text",
+        "config": {
+          "label": "Department Name",
+          "placeholder": ""
+        }
+      },
+      "description": {
+        "type": "Text",
+        "config": {
+          "label": "Description",
+          "placeholder": ""
+        }
+      }
+    }
+  }
+}

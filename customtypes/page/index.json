@@ -27,6 +27,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "staff_card": {
+              "type": "SharedSlice"
+            },
             "events": {
               "type": "SharedSlice"
             },

@@ -60,6 +60,9 @@ p {
 h2 {
   @apply text-heading-2;
 }
+h3 {
+  @apply text-heading-3;
+}
 .s-rich-text h1 {
   @apply text-heading-2;
 }
