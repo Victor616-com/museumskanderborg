@@ -57,10 +57,10 @@ uno.config.ts        # UnoCSS design tokens, grid utilities, typography
 
 ##
 
-,-------,
-/ / |
-/**\_\_** / /
-|**_/_**/ /
-|**..\_**|.'
-//
-.'/ Victor
+        ,-------,
+       /       / |
+      /______ /  /
+     |___/___/  /
+     |__..___|.'
+       //
+     .'/  Victor
