@@ -1,5 +1,9 @@
 <template>
-  <div v-if="displayBlockHeading" class="c-block-heading">
+  <div
+    v-if="displayBlockHeading"
+    class="c-block-heading"
+    data-long-read-heading
+  >
     <div class="w-full h-1px bg-text"></div>
     <div class="s-rich-text ml-3xs">
       <PrismicRichText :field="blockHeading" />

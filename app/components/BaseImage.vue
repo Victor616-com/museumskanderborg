@@ -6,6 +6,11 @@
       class="c-base-image__img"
       :class="{ 'c-base-image__img--zoom': zoomEffect }"
     />
+    <div
+      v-if="overlay"
+      class="c-base-image__overlay"
+      :style="{ '--overlay-opacity': overlayOpacity }"
+    />
   </div>
 </template>
 
@@ -14,6 +19,8 @@ const props = defineProps({
   src: { type: String, required: true },
   altText: { type: String, default: "" },
   zoomEffect: { type: Boolean, default: false },
+  overlay: { type: Boolean, default: false },
+  overlayOpacity: { type: Number, default: 0.3 },
   class: { type: String, default: "" },
 });
 </script>
@@ -21,6 +28,7 @@ const props = defineProps({
 <style lang="postcss">
 :where(.c-base-image) {
   overflow: hidden;
+  position: relative;
 
   & .c-base-image__img {
     width: 100%;
@@ -28,6 +36,15 @@ const props = defineProps({
     object-fit: cover;
     display: block;
   }
+
+  & .c-base-image__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: black;
+    opacity: var(--overlay-opacity, 0.3);
+    pointer-events: none;
+  }
+
   @media (hover: hover) {
     & .c-base-image__img--zoom {
       transition: transform 0.4s ease;

@@ -1,0 +1,49 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"block_heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Exercitation et labore aute reprehenderit consequat adipisicing nostrud. Cillum laborum amet ea tempor Lorem culpa minim ut laboris dolore voluptate tempor est."
+						}
+					}
+				]
+			},
+			"display_block_heading": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"staff_members": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"staff_member",
+								{
+									"key": "d87f5e9e-7e41-4ba2-bc80-39802d13851c",
+									"__TYPE__": "LinkContent",
+									"value": {
+										"__TYPE__": "DocumentLink",
+										"id": "mock_document_id"
+									}
+								}
+							]
+						]
+					}
+				]
+			},
+			"show_department": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			}
+		},
+		"items": []
+	}
+]

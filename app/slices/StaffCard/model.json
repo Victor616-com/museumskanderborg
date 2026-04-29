@@ -1,0 +1,86 @@
+{
+  "id": "staff_card",
+  "type": "SharedSlice",
+  "name": "StaffCard",
+  "description": "StaffCard",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "display_block_heading": {
+          "type": "Boolean",
+          "config": {
+            "label": "Display Block Heading",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "block_heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Block Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em"
+          }
+        },
+        "show_department": {
+          "type": "Boolean",
+          "config": {
+            "label": "Show Department",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "staff_members": {
+          "type": "Group",
+          "config": {
+            "label": "Staff Members",
+            "repeat": true,
+            "fields": {
+              "staff_member": {
+                "type": "Link",
+                "config": {
+                  "label": "Staff Member",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    {
+                      "id": "staff_member",
+                      "fields": [
+                        "name",
+                        "title",
+                        "email",
+                        "phone_number",
+                        {
+                          "id": "department",
+                          "customtypes": [
+                            {
+                              "id": "department",
+                              "fields": [
+                                "department_name"
+                              ]
+                            }
+                          ]
+                        },
+                        "image"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

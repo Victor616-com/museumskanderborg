@@ -70,6 +70,49 @@ type ContentRelationshipFieldWithData<
 }[Exclude<TCustomType[number], string>["id"]];
 
 /**
+ * Content for Department documents
+ */
+interface DepartmentDocumentData {
+  /**
+   * Department Name field in *Department*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: department.department_name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  department_name: prismic.KeyTextField;
+
+  /**
+   * Description field in *Department*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: department.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+}
+
+/**
+ * Department document from Prismic
+ *
+ * - **API ID**: `department`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type DepartmentDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<DepartmentDocumentData>,
+    "department",
+    Lang
+  >;
+
+/**
  * Content for Event documents
  */
 interface EventDocumentData {
@@ -196,6 +239,7 @@ export type EventPageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | StaffCardSlice
   | EventsSlice
   | ImageLinkSlice
   | QuoteSlice
@@ -350,11 +394,102 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
+/**
+ * Content for Staff Member documents
+ */
+interface StaffMemberDocumentData {
+  /**
+   * Department field in *Staff Member*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: staff_member.department
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  department: ContentRelationshipFieldWithData<
+    [{ id: "department"; fields: ["department_name"] }]
+  >;
+
+  /**
+   * Image field in *Staff Member*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: staff_member.image
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Name field in *Staff Member*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: staff_member.name
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Title field in *Staff Member*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: staff_member.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Email field in *Staff Member*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: staff_member.email
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  email: prismic.KeyTextField;
+
+  /**
+   * Phone Number field in *Staff Member*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: staff_member.phone_number
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  phone_number: prismic.KeyTextField;
+}
+
+/**
+ * Staff Member document from Prismic
+ *
+ * - **API ID**: `staff_member`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type StaffMemberDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<
+    Simplify<StaffMemberDocumentData>,
+    "staff_member",
+    Lang
+  >;
+
 export type AllDocumentTypes =
+  | DepartmentDocument
   | EventDocument
   | EventPageDocument
   | PageDocument
-  | SettingsDocument;
+  | SettingsDocument
+  | StaffMemberDocument;
 
 /**
  * Primary content in *Events → Default → Primary*
@@ -721,6 +856,117 @@ export type RichTextSlice = prismic.SharedSlice<
   RichTextSliceVariation
 >;
 
+/**
+ * Item in *StaffCard → Default → Primary → Staff Members*
+ */
+export interface StaffCardSliceDefaultPrimaryStaffMembersItem {
+  /**
+   * Staff Member field in *StaffCard → Default → Primary → Staff Members*
+   *
+   * - **Field Type**: Content Relationship
+   * - **Placeholder**: *None*
+   * - **API ID Path**: staff_card.default.primary.staff_members[].staff_member
+   * - **Documentation**: https://prismic.io/docs/fields/content-relationship
+   */
+  staff_member: ContentRelationshipFieldWithData<
+    [
+      {
+        id: "staff_member";
+        fields: [
+          "name",
+          "title",
+          "email",
+          "phone_number",
+          {
+            id: "department";
+            customtypes: [{ id: "department"; fields: ["department_name"] }];
+          },
+          "image",
+        ];
+      },
+    ]
+  >;
+}
+
+/**
+ * Primary content in *StaffCard → Default → Primary*
+ */
+export interface StaffCardSliceDefaultPrimary {
+  /**
+   * Display Block Heading field in *StaffCard → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: staff_card.default.primary.display_block_heading
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  display_block_heading: prismic.BooleanField;
+
+  /**
+   * Block Heading field in *StaffCard → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: staff_card.default.primary.block_heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  block_heading: prismic.RichTextField;
+
+  /**
+   * Show Department field in *StaffCard → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: staff_card.default.primary.show_department
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  show_department: prismic.BooleanField;
+
+  /**
+   * Staff Members field in *StaffCard → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: staff_card.default.primary.staff_members[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  staff_members: prismic.GroupField<
+    Simplify<StaffCardSliceDefaultPrimaryStaffMembersItem>
+  >;
+}
+
+/**
+ * Default variation for StaffCard Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type StaffCardSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<StaffCardSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *StaffCard*
+ */
+type StaffCardSliceVariation = StaffCardSliceDefault;
+
+/**
+ * StaffCard Shared Slice
+ *
+ * - **API ID**: `staff_card`
+ * - **Description**: StaffCard
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type StaffCardSlice = prismic.SharedSlice<
+  "staff_card",
+  StaffCardSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -742,6 +988,8 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      DepartmentDocument,
+      DepartmentDocumentData,
       EventDocument,
       EventDocumentData,
       EventPageDocument,
@@ -752,6 +1000,8 @@ declare module "@prismicio/client" {
       PageDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,
+      StaffMemberDocument,
+      StaffMemberDocumentData,
       AllDocumentTypes,
       EventsSlice,
       EventsSliceDefaultPrimary,
@@ -774,6 +1024,11 @@ declare module "@prismicio/client" {
       RichTextSliceDefaultPrimary,
       RichTextSliceVariation,
       RichTextSliceDefault,
+      StaffCardSlice,
+      StaffCardSliceDefaultPrimaryStaffMembersItem,
+      StaffCardSliceDefaultPrimary,
+      StaffCardSliceVariation,
+      StaffCardSliceDefault,
     };
   }
 }

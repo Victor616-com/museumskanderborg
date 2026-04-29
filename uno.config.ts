@@ -80,6 +80,7 @@ export default defineConfig({
       ...Object.keys(keywordMap).map((keyword) => `${prefix}-${keyword}`),
       ...Object.keys(sizeMap).map((size) => `${prefix}-${size}`),
     ]),
+    ...Array.from({ length: 5 }, (_, i) => `bg-accent${i + 1}`),
   ],
   theme: {
     breakpoints,
