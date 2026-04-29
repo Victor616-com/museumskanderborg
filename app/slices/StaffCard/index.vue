@@ -24,7 +24,7 @@ const staffWithFallback = data.staff_members.map((staff) => ({
       <div
         v-for="(staff, index) in staffWithFallback"
         :key="index"
-        class="relative w-full >=656:w-6col >=960:w-4col >=1280:w-3col aspect-ratio-34/48 flex flex-col justify-end p-xs"
+        class="group relative w-full >=656:w-6col >=960:w-4col >=1280:w-3col aspect-ratio-34/48 flex flex-col justify-end p-xs"
       >
         <BaseImage
           v-if="staff.staff_member.data.image"
