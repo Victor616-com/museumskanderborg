@@ -37,6 +37,10 @@
     --layout-margin: 42px;
   }
 }
+html {
+  scrollbar-gutter: stable;
+}
+
 * {
   box-sizing: border-box;
 }
