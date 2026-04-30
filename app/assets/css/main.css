@@ -54,8 +54,9 @@ h3 {
 }
 
 body {
-  margin-left: var(--layout-margin);
-  margin-right: var(--layout-margin);
+  padding-left: var(--layout-margin);
+  padding-right: var(--layout-margin);
+  overflow-x: hidden;
 }
 
 p {
