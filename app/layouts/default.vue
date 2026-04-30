@@ -1,6 +1,10 @@
 <template>
   <div>
-    <slot />
+    <LoadingScreen />
+    <Navigation :data="settings.data" />
+    <main class="mt-200px">
+      <slot />
+    </main>
     <Footer :data="settings.data" />
     <ClientOnly v-if="isDev">
       <GridOverlay />

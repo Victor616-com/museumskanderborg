@@ -1,31 +1,55 @@
 <template>
-  <div :class="['c-base-link group', gapClass]">
-    <div class="flex gap-2xs items-center">
+  <div :class="['c-base-link group', icon ? 'gap-2xs' : 'gap-0']">
+    <div :class="['flex gap-2xs items-center', colorClass]">
       <PrismicLink
         :field="link"
-        class="text-whiteText transition-all duration-300 group-hover:translate-x-1"
-        :class="sizeClass"
+        class="transition-all duration-300"
+        :class="[
+          {
+            'text-2xs-400': size === '2xs',
+            'text-s-400': size === 's',
+            'text-m-400': size === 'm',
+            'group-hover:translate-x-1': icon,
+          },
+        ]"
       >
         {{ link?.text || "Read more" }}
       </PrismicLink>
       <IconArrow
         v-if="icon"
-        class="transition-all duration-300 group-hover:-rotate-45"
+        :class="[
+          'transition-all duration-300 group-hover:-rotate-45 ',
+          {
+            'w-3 h-3': size === '2xs',
+            'w-5 h-5': size === 's',
+            'w-7 h-7': size === 'm',
+          },
+        ]"
       />
     </div>
     <div
-      class="w-0 h-1px bg-whiteText transition-all duration-300 group-hover:w-full"
+      :class="[
+        'h-1px transition-all duration-300',
+        variant === 'dark' ? 'bg-text' : 'bg-whiteText',
+        isActive ? 'w-full' : 'w-0 group-hover:w-full',
+      ]"
     ></div>
   </div>
 </template>
 
 <script setup>
 import { computed } from "vue";
+import { asLink } from "@prismicio/client";
 import IconArrow from "~/assets/icons/IconArrow.vue";
 
 const props = defineProps({
   link: { type: Object, required: true },
   icon: { type: Boolean, default: true },
+  variant: {
+    type: String,
+    default: "light",
+    validator: (v) => ["light", "dark"].includes(v),
+  },
   size: {
     type: String,
     default: "s",
@@ -33,23 +57,19 @@ const props = defineProps({
   },
 });
 
-const sizeClass = computed(() => {
-  const sizes = {
-    "2xs": "text-2xs-400",
-    s: "text-s-400",
-    m: "text-m-400",
-  };
-  return sizes[props.size];
+const prismic = usePrismic();
+const route = useRoute();
+
+const isActive = computed(() => {
+  const href = asLink(props.link, { linkResolver: prismic.linkResolver });
+  if (!href) return false;
+  const pathname = href.startsWith("http") ? new URL(href).pathname : href;
+  return route.path === pathname;
 });
 
-const gapClass = computed(() => {
-  const gaps = {
-    "2xs": "gap-6px",
-    s: "gap-2xs",
-    m: "gap-3xs",
-  };
-  return gaps[props.size];
-});
+const colorClass = computed(() =>
+  props.variant === "dark" ? "text-text" : "text-whiteText",
+);
 </script>
 
 <style lang="postcss">

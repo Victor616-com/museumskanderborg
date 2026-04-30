@@ -30,17 +30,6 @@
           },
           "thumbnails": []
         }
-      },
-      "navigation": {
-        "type": "Link",
-        "config": {
-          "label": "Navigation",
-          "placeholder": "",
-          "select": null,
-          "allowTargetBlank": true,
-          "allowText": true,
-          "repeat": true
-        }
       }
     },
     "Footer": {
@@ -81,6 +70,41 @@
         "type": "Link",
         "config": {
           "label": "Bottom Link",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": true
+        }
+      }
+    },
+    "Navigation": {
+      "navbar_links": {
+        "type": "Link",
+        "config": {
+          "label": "Navbar Links",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": true
+        }
+      },
+      "column_1": {
+        "type": "Link",
+        "config": {
+          "label": "Column 1",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": true,
+          "repeat": true
+        }
+      },
+      "column_2": {
+        "type": "Link",
+        "config": {
+          "label": "Column 2",
           "placeholder": "",
           "select": null,
           "allowTargetBlank": true,

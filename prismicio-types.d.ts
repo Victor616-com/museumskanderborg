@@ -345,20 +345,7 @@ interface SettingsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/image
    */
-  meta_image: prismic.ImageField<never>;
-
-  /**
-   * Navigation field in *Settings*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.navigation
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/link
-   */
-  navigation: prismic.Repeatable<
-    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
-  >; /**
+  meta_image: prismic.ImageField<never>; /**
    * Logo field in *Settings*
    *
    * - **Field Type**: Image
@@ -390,6 +377,43 @@ interface SettingsDocumentData {
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
   bottom_link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >; /**
+   * Navbar Links field in *Settings*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.navbar_links
+   * - **Tab**: Navigation
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  navbar_links: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Column 1 field in *Settings*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.column_1
+   * - **Tab**: Navigation
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  column_1: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
+
+  /**
+   * Column 2 field in *Settings*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.column_2
+   * - **Tab**: Navigation
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  column_2: prismic.Repeatable<
     prismic.LinkField<string, string, unknown, prismic.FieldState, never>
   >;
 }

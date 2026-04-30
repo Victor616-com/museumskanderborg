@@ -27,5 +27,8 @@
     "nuxt": "^4.2.2",
     "slice-machine-ui": "^2.21.2",
     "unocss": "^66.6.8"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0"
   }
 }
