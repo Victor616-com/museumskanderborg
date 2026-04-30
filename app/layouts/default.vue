@@ -1,6 +1,7 @@
 <template>
   <div>
     <slot />
+    <Footer :data="settings.data" />
     <ClientOnly v-if="isDev">
       <GridOverlay />
       <PrismicDataInspector />
@@ -8,8 +9,13 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import GridOverlay from "~/components/DevTools/GridOverlay.vue";
 import PrismicDataInspector from "~/components/DevTools/PrismicDataInspector.vue";
 const isDev = import.meta.dev;
+
+const prismic = usePrismic();
+const { data: settings } = await useAsyncData("settings", () =>
+  prismic.client.getSingle("settings"),
+);
 </script>

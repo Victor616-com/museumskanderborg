@@ -286,6 +286,31 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 /**
+ * Item in *Settings → Columns*
+ */
+export interface SettingsDocumentDataColumnsItem {
+  /**
+   * Title field in *Settings → Columns*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.columns[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Text field in *Settings → Columns*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.columns[].column
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  column: prismic.RichTextField;
+}
+
+/**
  * Content for Settings documents
  */
 interface SettingsDocumentData {
@@ -345,37 +370,28 @@ interface SettingsDocumentData {
   logo: prismic.ImageField<never>;
 
   /**
-   * Column 1 field in *Settings*
+   * Columns field in *Settings*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.column_1
+   * - **API ID Path**: settings.columns[]
    * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
-  column_1: prismic.RichTextField;
+  columns: prismic.GroupField<Simplify<SettingsDocumentDataColumnsItem>>;
 
   /**
-   * Column 2 field in *Settings*
+   * Bottom Link field in *Settings*
    *
-   * - **Field Type**: Rich Text
+   * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.column_2
+   * - **API ID Path**: settings.bottom_link
    * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  column_2: prismic.RichTextField;
-
-  /**
-   * Column 3 field in *Settings*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settings.column_3
-   * - **Tab**: Footer
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  column_3: prismic.RichTextField;
+  bottom_link: prismic.Repeatable<
+    prismic.LinkField<string, string, unknown, prismic.FieldState, never>
+  >;
 }
 
 /**
@@ -1000,6 +1016,7 @@ declare module "@prismicio/client" {
       PageDocumentDataSlicesSlice,
       SettingsDocument,
       SettingsDocumentData,
+      SettingsDocumentDataColumnsItem,
       StaffMemberDocument,
       StaffMemberDocumentData,
       AllDocumentTypes,

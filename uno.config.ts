@@ -14,6 +14,8 @@ const spacingRules = [
   ["w", "width", false],
   ["min-w", "min-width", false],
   ["max-w", "max-width", false],
+  ["gap-x", "gap", false],
+  ["gap-y", "gap", false],
   ["gap", "gap", false],
   ["m", "margin", true],
   ["mx", "margin-inline", true],
