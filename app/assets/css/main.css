@@ -91,4 +91,26 @@ h3 {
 }
 .s-rich-text a {
   @apply text-s-400 text-accent4;
+  text-decoration: underline;
+  @media (hover: hover) {
+    text-decoration: none;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: currentColor;
+      transition: width 300ms;
+    }
+    &:hover {
+      transform: translateX(1px);
+    }
+    &:hover::after {
+      width: 100%;
+    }
+  }
 }

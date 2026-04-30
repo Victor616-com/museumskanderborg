@@ -1,6 +1,6 @@
 <template>
   <footer class="c-footer">
-    <div class="w-12col >=960:w-10col flex flex-col gap-150px">
+    <div class="w-12col >=960:w-10col flex flex-col gap-l >656:gap-150px">
       <BaseImage
         v-if="data.logo.url"
         :src="data.logo.url"
@@ -26,7 +26,23 @@
             </span>
           </div>
         </div>
-        <div class="w-full h-1px bg-whiteText"></div>
+        <div class="flex flex-col gap-2xs w-full">
+          <div class="w-full h-1px bg-whiteText"></div>
+          <div
+            class="flex justify-between flex-col-reverse >=656:flex-row gap-1col"
+          >
+            <p class="text-whiteText text-2xs-400 w-fit">© 2026 </p>
+            <div class="flex gap-1col flex-wrap">
+              <BaseLink
+                v-for="(link, index) in data.bottom_link"
+                :key="index"
+                :link="link"
+                :icon="false"
+                size="2xs"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </footer>
@@ -38,7 +54,7 @@ defineProps({
 </script>
 <style lang="postcss">
 :where(.c-footer) {
-  @apply w-full bg-black px-margin pt-150px pb-100px flex justify-end;
+  @apply w-full bg-black px-margin pt-l >=656:pt-150px pb-100px flex justify-end;
   width: calc(
     12 * var(--layout-column) + 11 * var(--layout-gutter) + 2 *
       var(--layout-margin)
@@ -56,6 +72,10 @@ defineProps({
   }
   & .s-rich-text {
     @apply flex flex-col gap-2xs >=1280:gap-s;
+  }
+
+  & c-base-link a {
+    @apply text-whiteText text-2xs-400;
   }
 }
 </style>
