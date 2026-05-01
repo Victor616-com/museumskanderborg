@@ -38,7 +38,7 @@
       ref="menuEl"
       :class="[
         'c-nav-menu',
-        'fixed inset-0 z-40 bg-whiteText flex flex-col >=960:flex-row items-start gap-2col pt-[140px] >=960:pt-[220px] px-margin pointer-events-none overflow-hidden',
+        'fixed inset-0 z-40 bg-whiteText flex flex-col >=960:flex-row items-start gap-2col pt-140px >=960:pt-220px px-margin pointer-events-none overflow-hidden',
       ]"
     >
       <!-- Mobile: single merged column -->
@@ -178,7 +178,7 @@ function openMenu() {
     )
     .fromTo(
       links,
-      { y: 50, opacity: 0 },
+      { y: -50, opacity: 0 },
       { y: 0, opacity: 1, stagger: 0.1, duration: 0.5, ease: "power2.out" },
       0.45,
     );
