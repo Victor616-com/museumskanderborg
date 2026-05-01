@@ -1,5 +1,5 @@
 <template>
-  <div class="c-base-slider flex flex-col gap-2xs">
+  <div class="c-base-slider flex flex-col gap-xs">
     <div
       ref="scrollContainer"
       class="c-base-slider__track flex gap-gutter overflow-x-auto snap-x snap-mandatory"
@@ -10,25 +10,25 @@
     <div class="flex gap-2xs justify-end">
       <div
         :class="[
-          'w-fit bg-text p-3xs flex justify-center items-center rounded-50% rotate-180 cursor-pointer',
+          'w-fit bg-text p-3xs flex justify-center items-center rounded-50% rotate-180',
           'duration-300 transition-opacity',
-          showPagination.previous ? '' : 'opacity-50',
+          showPagination.previous ? 'cursor-pointer' : 'opacity-50',
         ]"
         @click="scrollSlide('left')"
         @mousedown.prevent
       >
-        <IconArrow />
+        <IconArrow class="w-4 h-4 text-whiteText" />
       </div>
       <div
         :class="[
-          'w-fit bg-text p-3xs flex justify-center items-center rounded-50% cursor-pointer',
+          'w-fit bg-text p-3xs flex justify-center items-center rounded-50% ',
           'duration-300 transition-opacity',
-          showPagination.next ? '' : 'opacity-50',
+          showPagination.next ? 'cursor-pointer' : 'opacity-50 cursor-default',
         ]"
         @click="scrollSlide('right')"
         @mousedown.prevent
       >
-        <IconArrow />
+        <IconArrow class="w-4 h-4 text-whiteText" />
       </div>
     </div>
   </div>
