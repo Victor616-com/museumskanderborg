@@ -3,7 +3,7 @@
     <NuxtLink
       to="/"
       :class="[
-        onMenuOpen ? 'w-2col' : 'w-4col',
+        onMenuOpen ? 'w-4col >=656:w-3col >=960:w-2col' : 'w-6col >=656:w-4col',
         'transition-width duration-400',
       ]"
     >
@@ -13,6 +13,7 @@
     <div class="flex gap-xs items-center">
       <BaseLink
         v-for="(link, index) in data.navbar_links"
+        class="<=960:hidden"
         :key="index"
         :link="link"
         :icon="false"
@@ -46,7 +47,11 @@
           class="flex flex-col overflow-y-scroll pb-100px gap-m max-h-100% items-start c-nav-col-scroll"
         >
           <BaseLink
-            v-for="(link, index) in [...data.column_1, ...data.column_2]"
+            v-for="(link, index) in [
+              ...data.navbar_links,
+              ...data.column_1,
+              ...data.column_2,
+            ]"
             :key="index"
             :link="link"
             :icon="false"
