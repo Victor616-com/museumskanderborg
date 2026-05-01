@@ -63,8 +63,30 @@ const route = useRoute();
 const isActive = computed(() => {
   const href = asLink(props.link, { linkResolver: prismic.linkResolver });
   if (!href) return false;
-  const pathname = href.startsWith("http") ? new URL(href).pathname : href;
-  return route.path === pathname;
+
+  let pathname;
+  if (href.startsWith("http")) {
+    try {
+      const url = new URL(href);
+      // Only treat as internal if the origin matches the current site
+      if (
+        typeof window !== "undefined" &&
+        url.origin !== window.location.origin
+      ) {
+        return false;
+      }
+      pathname = url.pathname;
+    } catch {
+      return false;
+    }
+  } else {
+    pathname = href;
+  }
+
+  // Normalize trailing slashes to avoid /about vs /about/ mismatches
+  const normalize = (p) =>
+    p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p;
+  return normalize(route.path) === normalize(pathname);
 });
 
 const colorClass = computed(() =>
