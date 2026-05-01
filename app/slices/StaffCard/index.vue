@@ -8,6 +8,8 @@ const staffWithFallback = data.staff_members.map((staff) => ({
   ...staff,
   fallbackColor: getRandomAccent(),
 }));
+
+const sectionRef = ref(null);
 </script>
 
 <template>
@@ -78,34 +80,40 @@ const staffWithFallback = data.staff_members.map((staff) => ({
       >
         <div class="c-staff-single__header flex flex-col gap-m">
           <span
+            ref="header"
             class="relative max-w-7col >=656:max-w-5col >=1280:max-w-5col flex flex-col gap-2xs"
           >
             <div class="w-110% h-3px bg-text"></div>
             <h3 class="text-heading-2 >=960:text-heading-1">
               {{ staffWithFallback[0].staff_member.data.name }}
             </h3>
-            <div
-              class="absolute w-40% >=1280:w-50% aspect-ratio-1 bg-accent3 -right-20% top-0 -translate-y-20% -z-1"
-            ></div>
+            <ParallaxWrapper :speed="10" :trigger="header">
+              <div
+                class="absolute w-40% >=1280:w-50% aspect-ratio-1 bg-accent3 -right-20% top-0 -translate-y-20% -z-1"
+              ></div>
+            </ParallaxWrapper>
           </span>
           <p class="text-m-400 max-w-7col >=656:max-w-4col >=1280:max-w-3col">
             {{ staffWithFallback[0].staff_member.data.title }}
           </p>
         </div>
 
-        <!-- Image + decorative circle -->
+        <!-- Image + decorative square -->
         <span class="c-staff-single__image flex justify-end">
           <span class="relative h-fit">
             <BaseImage
+              ref="image"
               v-if="staffWithFallback[0].staff_member.data.image"
               :src="staffWithFallback[0].staff_member.data.image.url"
               :alt="staffWithFallback[0].staff_member.data.image.alt"
               class="w-8col >=656:w-4col >=1280:w-3col aspect-ratio-34/48 object-cover"
               zoomEffect
             />
-            <div
-              class="absolute w-60% aspect-ratio-1 <=656:left-0 >=656:right-0 bottom-0 -translate-x-25% >=656:translate-x-25% translate-y-25% bg-accent1 -z-1"
-            ></div>
+            <ParallaxWrapper :trigger="image" :speed="5">
+              <div
+                class="absolute w-60% aspect-ratio-1 <=656:left-0 >=656:right-0 bottom-0 -translate-x-25% >=656:translate-x-25% translate-y-25% bg-accent1 -z-1"
+              ></div>
+            </ParallaxWrapper>
           </span>
         </span>
 
