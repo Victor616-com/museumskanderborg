@@ -60,6 +60,8 @@ const props = defineProps({
 const prismic = usePrismic();
 const route = useRoute();
 
+const requestURL = useRequestURL();
+
 const isActive = computed(() => {
   const href = asLink(props.link, { linkResolver: prismic.linkResolver });
   if (!href) return false;
@@ -68,13 +70,7 @@ const isActive = computed(() => {
   if (href.startsWith("http")) {
     try {
       const url = new URL(href);
-      // Only treat as internal if the origin matches the current site
-      if (
-        typeof window !== "undefined" &&
-        url.origin !== window.location.origin
-      ) {
-        return false;
-      }
+      if (url.origin !== requestURL.origin) return false;
       pathname = url.pathname;
     } catch {
       return false;
@@ -83,7 +79,6 @@ const isActive = computed(() => {
     pathname = href;
   }
 
-  // Normalize trailing slashes to avoid /about vs /about/ mismatches
   const normalize = (p) =>
     p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p;
   return normalize(route.path) === normalize(pathname);
