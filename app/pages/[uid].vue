@@ -14,7 +14,7 @@ useHead({
 </script>
 
 <template>
-  <main>
+  <main class="mt-70 mb-100 flex flex-col gap-xl">
     <SliceZone :slices="page?.data.slices ?? []" :components="components" />
   </main>
 </template>
