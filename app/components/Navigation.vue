@@ -26,9 +26,15 @@
         @click="toggleMenu"
         aria-label="Toggle menu"
       >
-        <span class="block w-22px h-2px bg-text rounded transform-origin-c" />
-        <span class="block w-22px h-2px bg-text rounded transform-origin-c" />
-        <span class="block w-22px h-2px bg-text rounded transform-origin-c" />
+        <span
+          class="block w-22px h-2px bg-text rounded transform-origin-c c-burger__bar"
+        />
+        <span
+          class="block w-22px h-2px bg-text rounded transform-origin-c c-burger__bar"
+        />
+        <span
+          class="block w-22px h-2px bg-text rounded transform-origin-c c-burger__bar"
+        />
       </button>
     </div>
   </nav>
@@ -162,7 +168,9 @@ function openMenu() {
   gsap.set(menuEl.value, { pointerEvents: "all" });
 
   menuTl = gsap
-    .timeline()
+    .timeline({
+      onComplete: () => gsap.set(links, { clearProps: "opacity" }),
+    })
     .to(bars[0], { y: 8, rotate: 45, duration: 0.3, ease: "power2.inOut" }, 0)
     .to(bars[1], { opacity: 0, duration: 0.15 }, 0)
     .to(bars[2], { y: -8, rotate: -45, duration: 0.3, ease: "power2.inOut" }, 0)
@@ -179,7 +187,13 @@ function openMenu() {
     .fromTo(
       links,
       { y: -50, opacity: 0 },
-      { y: 0, opacity: 1, stagger: 0.1, duration: 0.5, ease: "power2.out" },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 0.3,
+        ease: "power2.out",
+      },
       0.45,
     );
 }
@@ -290,5 +304,18 @@ onUnmounted(() => {
 
 .c-nav-col-scroll .c-base-link {
   scroll-snap-align: start;
+}
+@media (hover: hover) {
+  .c-nav-menu .c-base-link {
+    transition: opacity 0.2s ease;
+  }
+
+  .c-nav-menu:has(.c-base-link:hover) .c-base-link {
+    opacity: 0.6;
+  }
+
+  .c-nav-menu .c-base-link:hover {
+    opacity: 1 !important;
+  }
 }
 </style>
