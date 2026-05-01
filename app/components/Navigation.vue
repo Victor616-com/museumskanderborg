@@ -1,12 +1,9 @@
 <template>
-  <nav :class="['c-navigation', onMenuOpen ? 'py-2xs' : 'py-s']" ref="navEl">
-    <NuxtLink
-      to="/"
-      :class="[
-        onMenuOpen ? 'w-4col >=656:w-3col >=960:w-2col' : 'w-6col >=656:w-4col',
-        'transition-width duration-400',
-      ]"
-    >
+  <nav
+    :class="['c-navigation', onMenuOpen ? 'py-2xs >=656:py-3xs' : 'py-s']"
+    ref="navEl"
+  >
+    <NuxtLink ref="logoEl" to="/" class="w-6col >=656:w-4col">
       <BaseImage src="/Logo.svg" alt="Museum Skanderborg" />
     </NuxtLink>
 
@@ -136,6 +133,7 @@ const props = defineProps({
 const navEl = ref(null);
 const burgerEl = ref(null);
 const menuEl = ref(null);
+const logoEl = ref(null);
 const isScrolled = ref(false);
 const isOpen = ref(false);
 const route = useRoute();
@@ -261,10 +259,56 @@ watch(
   () => closeMenu(),
 );
 
+let logoFullHeight = 0;
+
+function getLogoScale() {
+  const w = window.innerWidth;
+  if (w >= 960) return 2 / 4;
+  if (w >= 656) return 3 / 4;
+  return 4 / 6;
+}
+
+watch(onMenuOpen, (val) => {
+  const el = logoEl.value?.$el ?? logoEl.value;
+  if (!el) return;
+  const img = el.querySelector("img");
+
+  if (val) {
+    logoFullHeight = el.offsetHeight;
+    const scale = getLogoScale();
+    gsap.to(el, {
+      height: logoFullHeight * scale,
+      duration: 0.4,
+      ease: "power2.inOut",
+    });
+    if (img)
+      gsap.to(img, {
+        scale,
+        transformOrigin: "left top",
+        duration: 0.4,
+        ease: "power2.inOut",
+      });
+  } else {
+    gsap.to(el, {
+      height: logoFullHeight || el.offsetHeight,
+      duration: 0.4,
+      ease: "power2.inOut",
+      onComplete: () => gsap.set(el, { clearProps: "height" }),
+    });
+    if (img)
+      gsap.to(img, {
+        scale: 1,
+        duration: 0.4,
+        ease: "power2.inOut",
+        onComplete: () => gsap.set(img, { clearProps: "scale,transform" }),
+      });
+  }
+});
+
 onMounted(() => {
   setTop = gsap.quickTo(navEl.value, "top", {
-    duration: 0.4,
-    ease: "power2.out",
+    duration: 0.1,
+    ease: "power2.inOut",
   });
   window.addEventListener("scroll", handleScroll, { passive: true });
   window.addEventListener("keydown", handleKeydown);
@@ -279,7 +323,16 @@ onUnmounted(() => {
 
 <style lang="postcss">
 :where(.c-navigation) {
-  @apply w-full px-margin bg-whiteText fixed top-0 left-0 z-50 flex items-center justify-between;
+  @apply w-full px-margin bg-whiteText fixed top-0 left-0 z-50 flex items-center justify-between transition-all duration-400;
+}
+
+.c-navigation > a {
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.c-navigation > a img {
+  height: auto !important;
 }
 
 .c-nav-menu {
