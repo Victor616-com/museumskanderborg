@@ -9,6 +9,16 @@
 }
 
 :root {
+  --color-accent1: #e77239;
+  --color-accent2: #a86062;
+  --color-accent3: #6e43fe;
+  --color-accent4: #5f7c9a;
+  --color-accent5: #ec3828;
+  --color-text: #2e2e2e;
+  --color-lightText: #5c5c5c;
+  --color-whiteText: #ffffff;
+  --color-background: #f3f3f2;
+
   --layout-gutter: 10px;
   --layout-margin: 16px;
 

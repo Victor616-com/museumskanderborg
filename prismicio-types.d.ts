@@ -239,6 +239,7 @@ export type EventPageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | LinkSlice
   | StaffCardSlice
   | EventsSlice
   | ImageLinkSlice
@@ -738,6 +739,94 @@ export type ImageLinkSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *Link → Default → Primary → Links*
+ */
+export interface LinkSliceDefaultPrimaryLinksItem {
+  /**
+   * Link field in *Link → Default → Primary → Links*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: link.default.primary.links[].link
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Image field in *Link → Default → Primary → Links*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: link.default.primary.links[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *Link → Default → Primary*
+ */
+export interface LinkSliceDefaultPrimary {
+  /**
+   * Display Block Heading field in *Link → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: link.default.primary.display_block_heading
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  display_block_heading: prismic.BooleanField;
+
+  /**
+   * Block Heading field in *Link → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: link.default.primary.block_heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  block_heading: prismic.RichTextField;
+
+  /**
+   * Links field in *Link → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: link.default.primary.links[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  links: prismic.GroupField<Simplify<LinkSliceDefaultPrimaryLinksItem>>;
+}
+
+/**
+ * Default variation for Link Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LinkSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<LinkSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Link*
+ */
+type LinkSliceVariation = LinkSliceDefault;
+
+/**
+ * Link Shared Slice
+ *
+ * - **API ID**: `link`
+ * - **Description**: Link
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type LinkSlice = prismic.SharedSlice<"link", LinkSliceVariation>;
+
+/**
  * Primary content in *Quote → Default → Primary*
  */
 export interface QuoteSliceDefaultPrimary {
@@ -1057,6 +1146,11 @@ declare module "@prismicio/client" {
       ImageLinkSliceDefaultPrimary,
       ImageLinkSliceVariation,
       ImageLinkSliceDefault,
+      LinkSlice,
+      LinkSliceDefaultPrimaryLinksItem,
+      LinkSliceDefaultPrimary,
+      LinkSliceVariation,
+      LinkSliceDefault,
       QuoteSlice,
       QuoteSliceDefaultPrimary,
       QuoteSliceVariation,
