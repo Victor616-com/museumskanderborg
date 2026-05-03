@@ -20,7 +20,7 @@ const formattedDate = computed(() => {
   });
 });
 </script>
-
+<!--
 <template>
   <main>
     <NuxtImg
@@ -31,5 +31,11 @@ const formattedDate = computed(() => {
     <h1>{{ event?.data.title }}</h1>
     <p>{{ formattedDate }}</p>
     <PrismicRichText :field="event?.data.description" />
+  </main>
+</template>
+-->
+<template>
+  <main class="my-100">
+    <CartoonEyes :size="200" :spacing="250" />
   </main>
 </template>

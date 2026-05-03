@@ -1,5 +1,5 @@
 <template>
-  <div class="c-base-slider flex flex-col gap-xs">
+  <div class="c-base-slider">
     <div
       ref="scrollContainer"
       class="c-base-slider__track flex gap-gutter overflow-x-auto snap-x snap-mandatory"
@@ -97,12 +97,26 @@ function scrollSlide(direction) {
 
 <style lang="postcss">
 :where(.c-base-slider) {
+  @apply flex flex-col gap-xs;
   & .c-base-slider__track {
     scrollbar-width: none;
     -ms-overflow-style: none;
 
     &::-webkit-scrollbar {
       display: none;
+    }
+    padding-right: var(--layout-margin);
+    margin-left: auto;
+    width: calc(
+      9 * var(--layout-column) + 8 * var(--layout-gutter) + var(--layout-margin)
+    );
+    margin-right: calc(-1 * var(--layout-margin));
+
+    @media (max-width: 657px) {
+      width: calc(
+        12 * var(--layout-column) + 11 * var(--layout-gutter) +
+          var(--layout-margin)
+      );
     }
   }
 }
