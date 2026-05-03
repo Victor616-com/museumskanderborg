@@ -164,21 +164,5 @@ function trimRichText(field, limit = 100) {
       }
     }
   }
-
-  & .events-slider .c-base-slider__track {
-    padding-right: var(--layout-margin);
-    margin-left: auto;
-    width: calc(
-      9 * var(--layout-column) + 8 * var(--layout-gutter) + var(--layout-margin)
-    );
-    margin-right: calc(-1 * var(--layout-margin));
-
-    @media (max-width: 657px) {
-      width: calc(
-        12 * var(--layout-column) + 11 * var(--layout-gutter) +
-          var(--layout-margin)
-      );
-    }
-  }
 }
 </style>
