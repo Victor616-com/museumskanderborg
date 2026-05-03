@@ -7,6 +7,7 @@ export const components = defineSliceZoneComponents({
   events: defineAsyncComponent(() => import("./Events/index.vue")),
   hero: defineAsyncComponent(() => import("./PageHero/index.vue")),
   image_link: defineAsyncComponent(() => import("./ImageLink/index.vue")),
+  link: defineAsyncComponent(() => import("./Link/index.vue")),
   quote: defineAsyncComponent(() => import("./Quote/index.vue")),
   rich_text: defineAsyncComponent(() => import("./RichTextEditor/index.vue")),
   staff_card: defineAsyncComponent(() => import("./StaffCard/index.vue")),
