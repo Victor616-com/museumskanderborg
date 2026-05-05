@@ -29,7 +29,7 @@ const props = defineProps({
   sizes: {
     type: String,
     default:
-      "bp375:100vw bp656:100vw bp960:100vw bp1280:100vw bp1440:100vw bp1536:100vw bp1920:100vw bp2560:2560px",
+      "bp375:80vw bp656:80vw bp960:80vw bp1280:80vw bp1440:80vw bp1536:80vw bp1920:80vw bp2560:80vw",
   },
   loading: { type: String, default: "lazy" },
   format: { type: String, default: "webp" },

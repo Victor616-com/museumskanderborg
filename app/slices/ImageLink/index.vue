@@ -2,9 +2,11 @@
   <section class="c-slice-image-link">
     <div class="image-wrapper hidden >=656:block">
       <div class="image-container">
-        <NuxtImg
+        <BaseImage
           :src="data.image.url"
           :alt="data.image.alt"
+          sizes="bp1280:100vw"
+          quality="100"
           class="object-cover aspect-9/7 >=1280:aspect-[9/5]"
         />
       </div>
