@@ -29,7 +29,11 @@ const props = defineProps({
   altText: { type: String, default: "" },
   width: { type: [Number, String], default: undefined },
   height: { type: [Number, String], default: undefined },
-  sizes: { type: String, default: undefined },
+  sizes: {
+    type: String,
+    default:
+      "bp375:100vw bp656:100vw bp960:100vw bp1280:100vw bp1440:100vw bp1536:100vw bp1920:100vw bp2560:2560px",
+  },
   loading: { type: String, default: "lazy" },
   format: { type: String, default: "webp" },
   quality: { type: [Number, String], default: 80 },
@@ -40,7 +44,7 @@ const props = defineProps({
   class: { type: String, default: "" },
 });
 
-const isLocal = computed(() => !props.src.startsWith("http"));
+const isLocal = computed(() => !props.src.startsWith("https"));
 const isSvg = computed(() => props.src.toLowerCase().endsWith(".svg"));
 
 // Local files (in /public) and SVGs shouldn't go through the Prismic provider
