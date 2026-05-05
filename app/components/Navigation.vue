@@ -8,7 +8,11 @@
       to="/"
       class="w-6col >=656:w-4col >=1440:w-3col >=1920:w-2col"
     >
-      <BaseImage src="/Logo.svg" alt="Museum Skanderborg" />
+      <img
+        src="/Logo.svg"
+        alt="Museum Skanderborg"
+        class="w-full h-full object-cover"
+      />
     </NuxtLink>
 
     <div class="flex gap-xs items-center">
