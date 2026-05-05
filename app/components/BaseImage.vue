@@ -3,6 +3,12 @@
     <NuxtImg
       :src="src"
       :alt="altText"
+      :width="width"
+      :height="height"
+      :sizes="sizes"
+      :loading="loading"
+      :format="format"
+      :quality="quality"
       class="c-base-image__img"
       :class="{ 'c-base-image__img--zoom': zoomEffect }"
     />
@@ -18,6 +24,16 @@
 const props = defineProps({
   src: { type: String, required: true },
   altText: { type: String, default: "" },
+  width: { type: [Number, String], default: undefined },
+  height: { type: [Number, String], default: undefined },
+  sizes: {
+    type: String,
+    default:
+      "bp375:100vw bp656:100vw bp960:100vw bp1280:100vw bp1440:100vw bp1536:100vw bp1920:100vw bp2560:2560px",
+  },
+  loading: { type: String, default: "lazy" },
+  format: { type: String, default: "webp" },
+  quality: { type: [Number, String], default: 80 },
   zoomEffect: { type: Boolean, default: false },
   overlay: { type: Boolean, default: false },
   overlayOpacity: { type: Number, default: 0.3 },
