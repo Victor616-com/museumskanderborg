@@ -3,11 +3,7 @@
     :to="to"
     class="c-slider-card group snap-start w-8col >=656:w-5col >=960:w-4col >=1280:w-3col shrink-0 flex flex-col gap-s"
   >
-    <BaseImage
-      :src="imageSrc"
-      :alt-text="imageAlt"
-      :zoom-effect="true"
-    />
+    <BaseImage :src="imageSrc" :alt-text="imageAlt" :zoom-effect="true" />
     <div class="flex flex-col gap-4px">
       <h3 class="text-heading-4 max-w-full">{{ title }}</h3>
       <p v-if="date" class="text-xs-400 mb-8px text-lightText">{{ date }}</p>
