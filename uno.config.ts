@@ -33,6 +33,8 @@ const spacingRules = [
   ["pb", "padding-bottom", true],
   ["left", "left", true],
   ["right", "right", true],
+  ["bottom", "bottom", false],
+  ["top", "top", true],
 ] as const;
 
 const keywordMap: Record<string, string> = {
