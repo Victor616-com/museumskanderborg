@@ -2,12 +2,13 @@
   <div class="c-base-image" :class="props.class">
     <NuxtImg
       :src="src"
+      :provider="resolvedProvider"
       :alt="altText"
       :width="width"
       :height="height"
       :sizes="sizes"
       :loading="loading"
-      :format="format"
+      :format="resolvedFormat"
       :quality="quality"
       class="c-base-image__img"
       :class="{ 'c-base-image__img--zoom': zoomEffect }"
@@ -21,24 +22,36 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
+
 const props = defineProps({
   src: { type: String, required: true },
   altText: { type: String, default: "" },
   width: { type: [Number, String], default: undefined },
   height: { type: [Number, String], default: undefined },
-  sizes: {
-    type: String,
-    default:
-      "bp375:100vw bp656:100vw bp960:100vw bp1280:100vw bp1440:100vw bp1536:100vw bp1920:100vw bp2560:2560px",
-  },
+  sizes: { type: String, default: undefined },
   loading: { type: String, default: "lazy" },
   format: { type: String, default: "webp" },
   quality: { type: [Number, String], default: 80 },
+  provider: { type: String, default: undefined },
   zoomEffect: { type: Boolean, default: false },
   overlay: { type: Boolean, default: false },
   overlayOpacity: { type: Number, default: 0.3 },
   class: { type: String, default: "" },
 });
+
+const isLocal = computed(() => !props.src.startsWith("http"));
+const isSvg = computed(() => props.src.toLowerCase().endsWith(".svg"));
+
+// Local files (in /public) and SVGs shouldn't go through the Prismic provider
+const resolvedProvider = computed(() => {
+  if (props.provider) return props.provider;
+  if (isLocal.value) return "ipx";
+  return undefined; // falls back to default provider (prismic)
+});
+
+// Don't force webp for SVGs — they'd get rasterized
+const resolvedFormat = computed(() => (isSvg.value ? undefined : props.format));
 </script>
 
 <style lang="postcss">

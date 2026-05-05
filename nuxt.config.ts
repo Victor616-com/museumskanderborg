@@ -19,6 +19,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/eslint", "@nuxtjs/prismic", "@unocss/nuxt", "@nuxt/image"],
   image: {
     provider: "prismic",
+    ipx: {},
     screens: {
       bp375: 375,
       bp656: 656,

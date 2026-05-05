@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!--
+      -->
     <LoadingScreen />
     <Navigation :data="settings.data" />
     <main class="mt-200px">
