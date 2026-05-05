@@ -3,7 +3,11 @@
     :class="['c-navigation', onMenuOpen ? 'py-2xs >=656:py-3xs' : 'py-s']"
     ref="navEl"
   >
-    <NuxtLink ref="logoEl" to="/" class="w-6col >=656:w-4col">
+    <NuxtLink
+      ref="logoEl"
+      to="/"
+      class="w-6col >=656:w-4col >=1440:w-3col >=1920:w-2col"
+    >
       <BaseImage src="/Logo.svg" alt="Museum Skanderborg" />
     </NuxtLink>
 

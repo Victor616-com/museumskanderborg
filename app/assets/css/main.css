@@ -44,7 +44,7 @@
 @media (min-width: 1280px) {
   :root {
     --layout-gutter: 24px;
-    --layout-margin: 42px;
+    --layout-margin: max(42px, (100vw - 1920px) / 2);
   }
 }
 html {

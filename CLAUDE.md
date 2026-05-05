@@ -37,6 +37,7 @@ Pages render their CMS content through `<SliceZone>`, which maps Prismic slice t
 ### Slice Machine
 
 Slices live in `app/slices/`. Each slice has:
+
 - `index.vue` — the rendered component
 - `model.json` — the Prismic field schema
 - `mocks.json` — mock data for the Slice Machine simulator
@@ -58,10 +59,11 @@ The layout uses a **12-column CSS grid** defined via CSS custom properties in `a
 - `--layout-margin` — page-edge margin (responsive)
 
 UnoCSS (`uno.config.ts`) extends these with custom utility classes:
-- `w-Ncol`, `px-Ncol`, etc. — size/spacing in column units (1–12)
+
+- `w-Ncol`, `px-Ncol`, etc. — size/spacing in column units (1–12). Use this classes when defining the horizontal sizing as much as possible.
 - `w-gutter`, `mx-layoutMargin` — keyword-based spacing
 - `w-xs`, `p-m`, `gap-l` — named size tokens (`3xs` → `2xl`)
-- Breakpoints: `>=656:`, `>=960:`, `>=1280:`, etc. (also `<=Npx:` for max-width) using pixel values from `breakpointList`
+- Breakpoints: `>=656:`, `>=960:`, `>=1280:`, etc. (also `<=Npx:` for max-width) using pixel values from `breakpointList`. Use these for media queries as much as possible.
 - Typography shortcuts: `text-heading-0` through `text-heading-5`, `text-xs-400`, `text-s-700`, etc. (fluid clamp-based sizes)
 
 Colors: `accent1`–`accent5` (orange, rose, purple, steel-blue, red), `text`, `lightText`, `whiteText`, `background`.

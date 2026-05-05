@@ -92,7 +92,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
       <div
         v-if="isOpen"
         ref="overlayEl"
-        class="c-slice-image-slider__lightbox fixed inset-0 z-200 bg-background px-margin py-margin"
+        class="c-slice-image-slider__lightbox fixed inset-0 z-200 bg-background px-margin py-l"
       >
         <div
           ref="lightboxImageEl"
