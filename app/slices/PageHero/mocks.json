@@ -69,6 +69,11 @@
 						]
 					}
 				]
+			},
+			"decorative_color": {
+				"__TYPE__": "FieldContent",
+				"value": "accent 1",
+				"type": "Select"
 			}
 		},
 		"items": []

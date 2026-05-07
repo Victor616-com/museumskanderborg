@@ -19,6 +19,21 @@
             "placeholder": ""
           }
         },
+        "decorative_color": {
+          "type": "Select",
+          "config": {
+            "label": "Decorative Color",
+            "placeholder": "",
+            "options": [
+              "accent 1",
+              "accent 2",
+              "accent 3",
+              "accent 4",
+              "accent 5"
+            ],
+            "default_value": "accent 1"
+          }
+        },
         "slide_show": {
           "type": "Group",
           "config": {

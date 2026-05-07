@@ -11,7 +11,10 @@
       :format="resolvedFormat"
       :quality="quality"
       class="c-base-image__img"
-      :class="{ 'c-base-image__img--zoom': zoomEffect }"
+      :class="{
+        'c-base-image__img--zoom': zoomEffect,
+        'c-base-image__img--monochrome': monochromeEffect,
+      }"
     />
     <div
       v-if="overlay"
@@ -39,6 +42,7 @@ const props = defineProps({
   quality: { type: [Number, String], default: 80 },
   provider: { type: String, default: undefined },
   zoomEffect: { type: Boolean, default: false },
+  monochromeEffect: { type: Boolean, default: false },
   overlay: { type: Boolean, default: false },
   overlayOpacity: { type: Number, default: 0.3 },
   class: { type: String, default: "" },
@@ -87,9 +91,29 @@ const resolvedFormat = computed(() => (isSvg.value ? undefined : props.format));
       }
     }
 
-    /* Also zoom when an ancestor `.group` is hovered */
+    & .c-base-image__img--monochrome {
+      filter: grayscale(100%);
+      transition: filter 0.4s ease;
+
+      &:hover {
+        filter: grayscale(0%);
+      }
+    }
+
+    /* Combined: declare both transitions so neither gets overridden */
+    & .c-base-image__img--zoom.c-base-image__img--monochrome {
+      transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+    }
+
+    /* Also respond when an ancestor `.group` is hovered */
     .group:hover & .c-base-image__img--zoom {
       transform: scale(1.05);
+    }
+
+    .group:hover & .c-base-image__img--monochrome {
+      filter: grayscale(0%);
     }
   }
 }
