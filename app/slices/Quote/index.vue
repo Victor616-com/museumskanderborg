@@ -45,12 +45,7 @@
 
 <script setup>
 const props = defineProps(getSliceComponentProps());
-
 const quote = props.slice.primary;
-
-onMounted(() => {
-  console.log("Quote slice data:", quote);
-});
 </script>
 <style lang="postcss">
 :where(.c-slice-quote) {

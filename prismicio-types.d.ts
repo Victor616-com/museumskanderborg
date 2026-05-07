@@ -625,6 +625,20 @@ export interface HeroSliceDefaultPrimary {
   title: prismic.KeyTextField;
 
   /**
+   * Decorative Color field in *PageHero → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: accent 1
+   * - **API ID Path**: hero.default.primary.decorative_color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  decorative_color: prismic.SelectField<
+    "accent 1" | "accent 2" | "accent 3" | "accent 4" | "accent 5",
+    "filled"
+  >;
+
+  /**
    * Slide Show field in *PageHero → Default → Primary*
    *
    * - **Field Type**: Group
