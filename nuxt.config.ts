@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Prismic + Nuxt Minimal Starter",
+      title: "Museum Skanderborg",
       htmlAttrs: { lang: "en" },
       meta: [
         { charset: "utf-8" },
