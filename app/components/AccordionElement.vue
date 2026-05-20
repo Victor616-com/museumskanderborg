@@ -10,9 +10,7 @@
       <div
         :class="[
           ' duration-500 ease-in-out shrink-0',
-          !collapsed
-            ? 'rotate-[45deg] group-hover:rotate-[35deg]'
-            : 'group-hover:rotate-[10deg]',
+          !collapsed ? 'rotate-[45deg] ' : 'group-hover:rotate-[10deg]',
         ]"
       >
         <IconPlus />

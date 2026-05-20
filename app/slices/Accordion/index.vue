@@ -27,6 +27,7 @@ const bgClass = computed(() => colorMap[data.color] ?? "bg-text");
       class="flex flex-col px-2xs >=656:px-s py-xs >=656:py-m"
       :class="bgClass"
     >
+      <div class="w-full h-1px bg-whiteText"></div>
       <AccordionElement
         v-for="(item, index) in accordionData"
         :key="index"
