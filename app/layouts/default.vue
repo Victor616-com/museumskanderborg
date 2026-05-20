@@ -4,7 +4,7 @@
       -->
     <LoadingScreen />
     <Navigation :data="settings.data" />
-    <main class="mt-200px">
+    <main class="">
       <slot />
     </main>
     <Footer :data="settings.data" />
