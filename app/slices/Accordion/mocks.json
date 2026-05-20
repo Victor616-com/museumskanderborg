@@ -1,0 +1,69 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"content": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "finger",
+									"type": "Text"
+								}
+							],
+							[
+								"heading",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "manufacturing",
+									"type": "Text"
+								}
+							],
+							[
+								"content",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Veniam elit mollit velit elit ex commodo irure ullamco. Magna deserunt quis eu ut nisi cillum."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"display_block_heading": {
+				"__TYPE__": "BooleanContent",
+				"value": true
+			},
+			"block_heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Excepteur enim non laboris commodo aliqua fugiat culpa eiusmod ipsum irure reprehenderit culpa adipisicing."
+						}
+					}
+				]
+			},
+			"color": {
+				"__TYPE__": "FieldContent",
+				"value": "Black",
+				"type": "Select"
+			}
+		},
+		"items": []
+	}
+]

@@ -30,7 +30,6 @@ Pages fetch content from Prismic via `usePrismic()` and `@prismicio/client`. Eac
 
 - `page` (uid `home`) → `/`
 - `page` (other uids) → `/:uid`
-- `event` → `/events/:uid`
 
 Pages render their CMS content through `<SliceZone>`, which maps Prismic slice types to Vue components registered in `app/slices/index.ts`.
 

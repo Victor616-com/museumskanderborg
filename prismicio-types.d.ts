@@ -239,6 +239,7 @@ export type EventPageDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | AccordionSlice
   | ImageSliderSlice
   | LinkSlice
   | StaffCardSlice
@@ -532,6 +533,123 @@ export type AllDocumentTypes =
   | PageDocument
   | SettingsDocument
   | StaffMemberDocument;
+
+/**
+ * Item in *Accordion → Default → Primary → Content*
+ */
+export interface AccordionSliceDefaultPrimaryContentItem {
+  /**
+   * Title field in *Accordion → Default → Primary → Content*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accordion.default.primary.content[].title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Heading field in *Accordion → Default → Primary → Content*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accordion.default.primary.content[].heading
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  heading: prismic.KeyTextField;
+
+  /**
+   * Content field in *Accordion → Default → Primary → Content*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accordion.default.primary.content[].content
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  content: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *Accordion → Default → Primary*
+ */
+export interface AccordionSliceDefaultPrimary {
+  /**
+   * Display Block Heading field in *Accordion → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: accordion.default.primary.display_block_heading
+   * - **Documentation**: https://prismic.io/docs/fields/boolean
+   */
+  display_block_heading: prismic.BooleanField;
+
+  /**
+   * Block Heading field in *Accordion → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accordion.default.primary.block_heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  block_heading: prismic.RichTextField;
+
+  /**
+   * Color field in *Accordion → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: Black
+   * - **API ID Path**: accordion.default.primary.color
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  color: prismic.SelectField<
+    "Black" | "Accent 1" | "Accent 2" | "Accent 3" | "Accent 4" | "Accent 5",
+    "filled"
+  >;
+
+  /**
+   * Content field in *Accordion → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: accordion.default.primary.content[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  content: prismic.GroupField<
+    Simplify<AccordionSliceDefaultPrimaryContentItem>
+  >;
+}
+
+/**
+ * Default variation for Accordion Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type AccordionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AccordionSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Accordion*
+ */
+type AccordionSliceVariation = AccordionSliceDefault;
+
+/**
+ * Accordion Shared Slice
+ *
+ * - **API ID**: `accordion`
+ * - **Description**: Accordion
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type AccordionSlice = prismic.SharedSlice<
+  "accordion",
+  AccordionSliceVariation
+>;
 
 /**
  * Primary content in *Events → Default → Primary*
@@ -1231,6 +1349,11 @@ declare module "@prismicio/client" {
       StaffMemberDocument,
       StaffMemberDocumentData,
       AllDocumentTypes,
+      AccordionSlice,
+      AccordionSliceDefaultPrimaryContentItem,
+      AccordionSliceDefaultPrimary,
+      AccordionSliceVariation,
+      AccordionSliceDefault,
       EventsSlice,
       EventsSliceDefaultPrimary,
       EventsSliceVariation,
