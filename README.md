@@ -10,6 +10,7 @@ Website for [Museum Skanderborg](https://museumskanderborg.vercel.app/), built w
 - **[Prismic](https://prismic.io)** — headless CMS for all content
 - **[Slice Machine](https://prismic.io/docs/slice-machine)** — component-driven content modelling
 - **[UnoCSS](https://unocss.dev)**
+- **[Gsap](https://gsap.com/)** - for animations that could not be done with css only
 
 ## Getting started
 
@@ -42,17 +43,20 @@ To edit slice schemas, use the Slice Machine UI at `http://localhost:9999` while
 
 ```
 app/
-├── assets/          # CSS, fonts, icon components
-├── components/      # Shared Vue components
-├── pages/           # File-based routes
-├── slices/          # Prismic slice components (Slice Machine)
-│   └── index.ts     # Auto-generated slice registry — do not edit
+├── assets/            # CSS, fonts, icon components
+│   └── main.css       # this is where the grids, colors, rich text styles are defined
+├── components/        # Shared Vue components
+│   └── Base***.vue    # This are base components used throughout the app. Be very carefull when changing them
+├── pages/             # File-based routes
+├── slices/            # Prismic slice components (Slice Machine)
+│   └── index.ts       # Auto-generated slice registry — do not edit
+│   └──SliceName
+│      └── index.vue   # The slice layout - this is what has to be edited to modify the slice
 └── layouts/
-    └── default.vue  # Root layout
-
-customtypes/         # Prismic document type schemas
-nuxt.config.ts       # Nuxt + Prismic route configuration
-uno.config.ts        # UnoCSS design tokens, grid utilities, typography
+    └── default.vue    # Root layout
+customtypes/           # Prismic document type schemas
+nuxt.config.ts         # Nuxt + Prismic route configuration
+uno.config.ts          # UnoCSS design tokens, grid utilities, typography
 ```
 
 ##
