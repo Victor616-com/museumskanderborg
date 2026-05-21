@@ -32,6 +32,9 @@
       zoomEffect
       overlay
     />
+    <div ref="text" class="text-whiteText reveal-text z-1">
+      <PrismicRichText :field="link?.text" />
+    </div>
     <div class="flex items-center justify-between gap-2xs w-full">
       <h3
         ref="title"
@@ -39,6 +42,7 @@
       >
         {{ link?.link?.text }}
       </h3>
+
       <IconArrow ref="arrow" class="text-whiteText w-7 h-7 z-1" />
     </div>
   </PrismicLink>
@@ -56,6 +60,7 @@ const props = defineProps({
 const path = ref(null);
 const title = ref(null);
 const arrow = ref(null);
+const text = ref(null);
 let tl = null;
 
 onMounted(() => {
@@ -71,7 +76,6 @@ onUnmounted(() => {
 });
 
 function getArrowEl() {
-  // IconArrow is a component — resolve to its root DOM node
   return arrow.value?.$el ?? arrow.value;
 }
 
@@ -110,6 +114,18 @@ function runAnimation() {
     },
     0,
   );
+
+  tl.to(
+    text.value,
+    {
+      y: 0,
+      x: 8,
+      autoAlpha: 1,
+      duration: 0.6,
+      ease: "power3.out",
+    },
+    0.1,
+  );
 }
 
 function resetAnimation() {
@@ -147,12 +163,24 @@ function resetAnimation() {
     },
     0,
   );
+
+  tl.to(
+    text.value,
+    {
+      y: 20,
+      x: 5,
+      autoAlpha: 0,
+      duration: 0.4,
+      ease: "power2.inOut",
+    },
+    0,
+  );
 }
 </script>
 
 <style lang="postcss">
 :where(.c-link-card) {
-  @apply relative w-full >=656:w-6col >=960:w-4col aspect-460/540 flex flex-col justify-end p-xs no-underline overflow-hidden cursor-pointer;
+  @apply relative w-full >=656:w-6col >=960:w-4col aspect-460/540 flex flex-col gap-m justify-end p-xs no-underline overflow-hidden cursor-pointer;
 
   & .svg {
     width: 100%;
@@ -167,6 +195,12 @@ function resetAnimation() {
     stroke-dashoffset: 1;
     stroke-dasharray: 1;
     visibility: hidden;
+  }
+
+  & .reveal-text {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
   }
 }
 </style>

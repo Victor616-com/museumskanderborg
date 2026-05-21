@@ -969,6 +969,16 @@ export interface LinkSliceDefaultPrimaryLinksItem {
   link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
+   * Text field in *Link → Default → Primary → Links*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: link.default.primary.links[].text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+
+  /**
    * Image field in *Link → Default → Primary → Links*
    *
    * - **Field Type**: Image

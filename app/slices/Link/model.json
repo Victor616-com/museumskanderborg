@@ -47,6 +47,15 @@
                   "repeat": false
                 }
               },
+              "text": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Text",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,strong,em"
+                }
+              },
               "image": {
                 "type": "Image",
                 "config": {
