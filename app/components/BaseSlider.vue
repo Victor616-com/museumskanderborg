@@ -2,8 +2,13 @@
   <div class="c-base-slider">
     <div
       ref="scrollContainer"
-      class="c-base-slider__track flex gap-gutter overflow-x-auto snap-x snap-mandatory"
+      :class="[
+        'c-base-slider__track flex gap-gutter overflow-x-auto snap-x snap-mandatory',
+        isDragging ? 'cursor-grabbing select-none' : 'cursor-grab',
+      ]"
       @scroll="onScroll"
+      @mousedown="onMouseDown"
+      @click.capture="onClickCapture"
     >
       <slot />
     </div>
@@ -43,6 +48,13 @@ const showPagination = ref({ previous: false, next: false });
 
 let observer;
 
+// Drag state
+const isDragging = ref(false);
+const hasDragged = ref(false);
+let dragStartX = 0;
+let dragStartScrollLeft = 0;
+const DRAG_THRESHOLD = 5;
+
 onMounted(() => {
   onScroll();
   getSlides();
@@ -57,6 +69,8 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   observer?.disconnect();
+  window.removeEventListener("mousemove", onMouseMove);
+  window.removeEventListener("mouseup", onMouseUp);
 });
 
 function getSlides() {
@@ -77,6 +91,57 @@ function onScroll() {
     previous: el.scrollLeft > 0,
     next: el.scrollLeft + el.clientWidth < el.scrollWidth - 1,
   };
+}
+
+function onMouseDown(e) {
+  if (e.button !== 0) return;
+  e.preventDefault();
+  isDragging.value = true;
+  hasDragged.value = false;
+  dragStartX = e.clientX;
+  dragStartScrollLeft = scrollContainer.value.scrollLeft;
+  scrollContainer.value.style.scrollSnapType = "none";
+  window.addEventListener("mousemove", onMouseMove);
+  window.addEventListener("mouseup", onMouseUp);
+}
+
+function onMouseMove(e) {
+  if (!isDragging.value) return;
+  const walk = e.clientX - dragStartX;
+  if (Math.abs(walk) > DRAG_THRESHOLD) hasDragged.value = true;
+  scrollContainer.value.scrollLeft = dragStartScrollLeft - walk;
+}
+
+function onMouseUp() {
+  if (!isDragging.value) return;
+  isDragging.value = false;
+  scrollContainer.value.style.scrollSnapType = "";
+  window.removeEventListener("mousemove", onMouseMove);
+  window.removeEventListener("mouseup", onMouseUp);
+  if (hasDragged.value) snapToNearest();
+}
+
+function onClickCapture(e) {
+  if (hasDragged.value) {
+    e.stopPropagation();
+    e.preventDefault();
+    hasDragged.value = false;
+  }
+}
+
+function snapToNearest() {
+  const el = scrollContainer.value;
+  const current = el.scrollLeft;
+  let nearest = slideValues.value[0];
+  let minDist = Infinity;
+  for (const slide of slideValues.value) {
+    const dist = Math.abs(slide.offsetLeft - current);
+    if (dist < minDist) {
+      minDist = dist;
+      nearest = slide;
+    }
+  }
+  if (nearest) el.scrollTo({ left: nearest.offsetLeft, behavior: "smooth" });
 }
 
 function scrollSlide(direction) {

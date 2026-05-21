@@ -12,8 +12,8 @@
 							[
 								"link",
 								{
-									"__TYPE__": "LinkContent",
 									"key": "9a47e3b8-69bb-47e1-87d4-61164027db5f",
+									"__TYPE__": "LinkContent",
 									"value": {
 										"__TYPE__": "ExternalLink",
 										"url": "https://slicemachine.dev",
@@ -45,6 +45,20 @@
 									"credits": null,
 									"__TYPE__": "ImageContent",
 									"thumbnails": {}
+								}
+							],
+							[
+								"text",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Sint non anim occaecat commodo labore amet cillum duis."
+											}
+										}
+									]
 								}
 							]
 						]

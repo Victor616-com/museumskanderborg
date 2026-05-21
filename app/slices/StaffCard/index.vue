@@ -107,7 +107,6 @@ const sectionRef = ref(null);
               :src="staffWithFallback[0].staff_member.data.image.url"
               :alt="staffWithFallback[0].staff_member.data.image.alt"
               class="w-8col >=656:w-4col >=1280:w-3col aspect-ratio-34/48 object-cover"
-              zoomEffect
             />
             <ParallaxWrapper :trigger="image" :speed="5">
               <div

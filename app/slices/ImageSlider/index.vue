@@ -12,6 +12,55 @@ const lightboxImageEl = ref(null);
 
 const activeImage = computed(() => data.images[activeIndex.value]?.image);
 
+const accentColors = ["#E77239", "#A86062", "#6E43FE", "#5F7C9A", "#EC3828"];
+const accentColor = ref(accentColors[0]);
+const isHovering = ref(false);
+const springX = ref(0);
+const springY = ref(0);
+let targetX = 0;
+let targetY = 0;
+let vx = 0;
+let vy = 0;
+let springRaf = null;
+
+const STIFFNESS = 0.12;
+const DAMPING = 0.75;
+
+function springLoop() {
+  vx = (vx + (targetX - springX.value) * STIFFNESS) * DAMPING;
+  vy = (vy + (targetY - springY.value) * STIFFNESS) * DAMPING;
+  springX.value += vx;
+  springY.value += vy;
+  springRaf = requestAnimationFrame(springLoop);
+}
+
+function onSectionMouseMove(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  targetX = e.clientX - rect.left;
+  targetY = e.clientY - rect.top;
+}
+
+let leaveTimeout = null;
+
+function onSectionMouseLeave() {
+  clearTimeout(leaveTimeout);
+  isHovering.value = false;
+}
+
+function onCardEnter() {
+  clearTimeout(leaveTimeout);
+  isHovering.value = true;
+  const current = accentColor.value;
+  const choices = accentColors.filter((c) => c !== current);
+  accentColor.value = choices[Math.floor(Math.random() * choices.length)];
+}
+
+function onCardLeave() {
+  leaveTimeout = setTimeout(() => {
+    isHovering.value = false;
+  }, 50);
+}
+
 function openLightbox(index) {
   activeIndex.value = index;
   isOpen.value = true;
@@ -67,12 +116,37 @@ function onKeydown(e) {
   if (e.key === "ArrowRight") navigate(1);
 }
 
-onMounted(() => window.addEventListener("keydown", onKeydown));
-onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
+onMounted(() => {
+  window.addEventListener("keydown", onKeydown);
+  springLoop();
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", onKeydown);
+  if (springRaf) cancelAnimationFrame(springRaf);
+});
 </script>
 
 <template>
-  <section class="c-slice-image-slider">
+  <section
+    class="c-slice-image-slider"
+    @mousemove="onSectionMouseMove"
+    @mouseleave="onSectionMouseLeave"
+  >
+    <div
+      class="expand-cursor absolute pointer-events-none z-10 rounded-50% flex items-center justify-center select-none"
+      :class="isHovering ? 'is-active' : ''"
+      :style="{
+        left: `${springX}px`,
+        top: `${springY}px`,
+        backgroundColor: accentColor,
+      }"
+    >
+      <span class="text-whiteText uppercase tracking-widest text-2xs-400"
+        >Expand</span
+      >
+    </div>
+
     <BlockHeading
       :display-block-heading="data.display_block_heading"
       :block-heading="data.block_heading"
@@ -83,6 +157,8 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
         :key="image?.image?.id"
         class="snap-start shrink-0 w-8col >=656:w-5col >=960:w-4col cursor-pointer"
         @click="openLightbox(index)"
+        @mouseenter="onCardEnter"
+        @mouseleave="onCardLeave"
       >
         <BaseImage :src="image.image.url" :alt-text="image.image.alt || ''" />
       </div>
@@ -152,6 +228,22 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
 <style lang="postcss">
 :where(.c-slice-image-slider) {
   @apply flex flex-col w-full;
+  position: relative;
+
+  & .expand-cursor {
+    width: 120px;
+    height: 120px;
+    transform: translate(-50%, -50%) scale(0);
+    transition:
+      transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background-color 0.3s ease;
+
+    @media (hover: hover) {
+      &.is-active {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  }
 
   & .c-base-slider__track {
     align-items: end;

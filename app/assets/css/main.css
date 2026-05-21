@@ -70,7 +70,7 @@ body {
 }
 
 p {
-  @apply text-s-400;
+  @apply text-s-400 mb-2;
 }
 h2 {
   @apply text-heading-2;
