@@ -99,7 +99,7 @@
         </div>
         <div
           v-if="data.column_1.length > 5"
-          class="absolute bottom-0 left-0 right-0 h-50 bg-gradient-to-b from-transparent to-white pointer-events-none"
+          class="absolute bottom-0 left-0 right-0 h-50 bg-gradient-to-b from-transparent to-[#F3F3F2] pointer-events-none"
         />
       </div>
       <div

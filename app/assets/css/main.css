@@ -16,7 +16,7 @@
   --color-accent5: #ec3828;
   --color-text: #2e2e2e;
   --color-lightText: #5c5c5c;
-  --color-whiteText: #ffffff;
+  --color-whiteText: #f3f3f2;
   --color-background: #f3f3f2;
 
   --layout-gutter: 10px;
@@ -67,6 +67,7 @@ body {
   padding-left: var(--layout-margin);
   padding-right: var(--layout-margin);
   overflow-x: hidden;
+  background-color: #f3f3f2;
 }
 
 p {
